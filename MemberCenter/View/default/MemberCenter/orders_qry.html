@@ -1,0 +1,100 @@
+<include file="Public/head_app"/> 
+<!--头部  结束-->
+<div class="dak" style=" padding-bottom:1rem;">
+  <div class="grzl"><a onclick="javascript:history.back(-1);"><div class="hyjg jfbg" style="margin-top: 55px;">订单列表</div></a></div>
+</div>
+<volist name='orderlist' id='vo'>
+  <div class="ddcx" id="remore{$vo.id}">
+    <div class="ddcx-1"><p style="display:block;float:left;margin-top:0.5rem; margin-left:0.5rem;color:#746f6f">订单号：{$vo.sn}</p><p style="text-align:right; color:#F00; margin-top:0.5rem; margin-right:0.5rem; display:block;float:right">待卖家发货</p></div>
+      <div class="ddcx-2">
+          <a href="{:U('addon/WeiSite/WeiSite/Goods_detail',array(id=>$vo[shipping_id]))}"><div class="ddcx-left">
+            <div class="ddcx-pic1" style="background: url({$vo.goodimg|get_cover_url}) no-repeat;background-size:cover;" ></div>
+            <div class="ddcx-wz">
+              <p>{$vo.shipping_name|msubstr=0,10}</p>
+              <p>颜色：{$vo.ys}&nbsp;&nbsp;尺码：{$vo.cm}&nbsp;&nbsp;数量：{$vo.number}</p><p>￥{$vo.goodprice}  </p><p>￥{$vo.yprice}</p>
+            </div>
+          </div></a>
+        <div class="ddcx-right">
+            <div class="ddcx-right-1" >
+            <a href="#"><div class="lxmj">联系卖家</div></a>
+            <a onclick="remoredd({$vo.id})"><div class="lxmj-2"> <if condition="$vo[pay_status] eq 2">删除订单<else />取消订单</if></div></a>
+            <if condition="$vo[pay_status] eq 2">
+              <a><div class="lxmj-2" style="color:#0c0c0c">已支付</div></a>
+            <else/>
+              <a onclick="gozhifu({$vo.id})"><div id='gozhifu' data-url="{:U('addon/WeiSite/WeiSite/Goods_detail',array(id=>$vo[shipping_id]))}" class="lxmj-2">去支付</div></a>
+            </if>
+            </div>
+        </div>
+    </div>
+  </div>
+</volist>
+<include file="Public/footer_app"/> 
+<script type="text/javascript">
+  function gozhifu (zfid) {
+    var urls=$("#gozhifu").attr('data-url');
+     $.ajax({
+        type: "POST",
+        url: "{:U('addon/MemberCenter/MemberCenter/ajax_zhifu')}",
+        data:"zfid=" + zfid,
+        success: function(msg) {
+           if(msg['zf']==1){
+              layer.msg('请稍候...');
+              setTimeout(function(){
+                  window.location.href="{:U('addon/MemberCenter/MemberCenter/qrdd')}";
+              },3000)
+             
+           }else if(msg['zf']==3){
+               layer.msg('正前往登录，请稍后...');
+                setTimeout(function(){
+                  window.location.href="/index.php?s=/addon/Login/Login/index.html"
+                },3000)
+           }else if(msg['zf']==6){
+                layer.msg('该商品库存数量不足，无法完成支付');
+                if(urls){
+                setTimeout(function(){
+                  window.location.href=urls;
+                },3000)
+              }
+           }
+           else{
+              layer.msg('支付失败，请稍后重试');
+           }
+        }
+      });
+  }
+  var dd=1
+  function remoredd(obj){
+    if(dd==2){return false;}
+      layer.confirm('是否取消该订单？', {
+          btn: ['确定','取消'] //按钮
+        }, function(){
+          $.ajax({
+                type: "POST",
+                url: "{:U('addon/MemberCenter/MemberCenter/quxiaodd')}",
+                data: "get_id=" + obj,
+                success: function(msg) {
+                    if(msg['del']==1){
+                      layer.msg('取消订单成功', {icon: 1});
+                      setTimeout(function(){
+                         dd=1;
+                        $("#remore"+obj).remove();
+                      },3000)
+                    }else if(msg['del']==3){
+                      layer.msg('正前往登录，请稍后...');
+                       setTimeout(function(){
+                        window.location.href="/index.php?s=/addon/Login/Login/index.html"
+                      },3000)
+                    }else {
+                      dd=1;
+                      // layer.msg('取消订单失败！请稍后重试'); 
+                      layer.msg('取消订单失败！请稍后重试', {icon: 2});
+                    }
+                    
+                }
+            });
+        }, function(){
+          dd=1;
+          layer.msg('已取消',{icon: 1});
+        });
+  }
+</script>

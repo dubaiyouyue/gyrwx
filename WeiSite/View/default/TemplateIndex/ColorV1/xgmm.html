@@ -1,0 +1,48 @@
+<form action="/index.php?s=/addon/WeiSite/WeiSite/xgmmposit.html" method="POST" name="myform" id="myform">
+<div class="Login" style=" margin-top:-1rem;">
+<ul>
+<li>
+  <h3>新密码：</h3>
+  <p class="Code-Pic1">
+    <input type="password" name="pass" id="pass" placeholder="6-16个字符，区大小写" />
+  </p>
+</li>
+<li>
+  <h3>确认新密码：</h3>
+  <p class="Code-Pic1">
+    <input type="password" name="pass2" id="pass2" placeholder="6-16个字符，区大小写" />
+  </p>
+</li>
+<li class="Login-Btn"  style=" padding-bottom:1.5rem; margin-top:1rem;"> <a id="liqidonglu" onclick="checkedformdx();">确定</a> </li>
+</ul>
+</div>
+</form>
+
+<script>
+<?php
+$ok=$_GET['ok'];
+if($ok=='ok') echo 'alert(\'新密码修改成功\');location.href = \'/index.php?s=/addon/WeiSite/WeiSite/grzx.html\';';
+?>
+document.getElementById('pass').focus();
+function checkedformdx(){
+	var pass=$('#pass').val();
+	var pass2=$('#pass2').val();
+	if(!pass){
+		document.getElementById('pass').focus();
+		alert('请填写新密码');
+		return false;
+	}if(!pass2){
+		document.getElementById('pass2').focus();
+		alert('请填写确认新密码');
+		return false;
+	}if(pass!=pass2){
+		document.getElementById('pass2').focus();
+		alert('两次密码不一致');
+		return false;
+	}
+	document.getElementById("liqidonglu").onclick = function(){};
+	$('#liqidonglu').html('正在修改...');
+	document.getElementById('myform').submit();
+}
+</script>
+<div class="clearfix"></div>

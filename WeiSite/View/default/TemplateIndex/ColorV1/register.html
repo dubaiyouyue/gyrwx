@@ -1,0 +1,129 @@
+<form action="/index.php?s=/addon/WeiSite/WeiSite/rpost.html" method="POST" name="myform" id="myform">
+
+<div class="Login" style=" margin-top:-0.5rem;">
+   
+    
+		<ul>
+        
+        <li>
+  <p class="Code-Pic1">
+					<input type="text" name="sj" id="sj" placeholder="手机号" />
+					
+				</p>
+		  </li>
+        <li>
+				<p class="Code-Pic2">
+					<input type="text" name="yx" id="yx" placeholder="电子邮箱" />
+					
+				</p>
+		  </li>
+        
+<li>
+				
+				<p class="Code-Btn">
+					<input type="text" id="yzm" name="yzm" placeholder="验证码" />
+					<a><img onclick="this.src='/cachec/yzm.php?a=showseccode&update=' + Math.random()" src="/cachec/yzm.php" width="100%" height="100%"></a>
+				</p>
+			</li>
+            <li>
+	  <li>
+				
+				<p class="Code-Btn">
+					<input type="text" id="dxyzm" value="{$dxyzm}" name="dxyzm" placeholder="输入短信验证码" />
+					<a>点击发送验证码</a>
+				</p>
+			</li>
+            <li>
+				<p>
+					<input type="password" id="pass" name="pass" placeholder="登录密码" />
+				</p>
+			</li>
+            <li>
+				<p>
+					<input type="password" id="pass2" name="pass2" placeholder="确认密码" />
+				</p>
+			</li>
+			
+			
+			<li class="QuickBtn">
+				<a href="/index.php?s=/addon/WeiSite/WeiSite/Signin.html">已有帐号，马上去登录</a>
+			</li>
+			<li class="Login-Btn" style=" padding-bottom:1.5rem; margin-top:1rem;">
+				<a onclick="checkedformdx();" id="liqidonglu">立即注册</a>
+			</li>
+			
+		</ul>
+</div>
+
+</form>
+
+<script>
+
+document.getElementById('sj').focus();
+function checkedformdx(){
+	var sj=$('#sj').val();
+	var yx=$('#yx').val();
+	var yzm=$('#yzm').val();
+	var dxyzm=$('#dxyzm').val();
+	var pass=$('#pass').val();
+	var pass2=$('#pass2').val();
+	if(!sj || (sj.length!=7 && sj.length!=11) || isNaN(sj)){
+		document.getElementById('sj').focus();
+		alert('请填写正确的手机号');
+		return false;
+	}
+	if(!yx || !youxiang('yx')){
+		document.getElementById('yx').focus();
+		alert('请填写正确的邮箱');
+		return false;
+	}
+	if(!yzm){
+		document.getElementById('yzm').focus();
+		alert('请填写验证码');
+		return false;
+	}
+	if(!dxyzm){
+		document.getElementById('dxyzm').focus();
+		alert('请填写短信验证码');
+		return false;
+	}
+	if(!pass){
+		document.getElementById('pass').focus();
+		alert('请填写密码');
+		return false;
+	}
+	if(!pass2){
+		document.getElementById('pass2').focus();
+		alert('请填写确认密码');
+		return false;
+	}
+	if(pass!=pass2){
+		document.getElementById('pass2').focus();
+		alert('两次密码不一致');
+		return false;
+	}
+	document.getElementById("liqidonglu").onclick = function(){};
+	$('#liqidonglu').html('正在注册...');
+	document.getElementById('myform').submit();
+}
+function  youxiang(n){
+	var email = document.getElementById(n).value;
+	//alert(email);
+	//return false;
+	if (email != "") {
+		var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+		isok= reg.test(email );
+		if (!isok) {
+			return false;
+		}
+		else return true;
+	}
+	return false;
+}
+</script>
+
+
+
+
+
+<div class="clearfix"></div>

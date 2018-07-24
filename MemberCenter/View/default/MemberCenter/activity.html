@@ -1,0 +1,87 @@
+<include file="Public/head_app"/> 
+<!--头部  结束-->
+<div class="dak" style=" padding-bottom:1rem;">
+  <div class="grzl"> <a onclick="javascript:history.back(-1);">
+    <div class="hyjg jfbg">{$get_lanmu.title}</div>
+    </a> </div>
+    </div>
+    <div class="yhhd" id='more_hd'>
+    <volist name="hd_content" id='vo'>
+      <if condition="$i%2 neq 0">
+          <div class="yhhd-1 clearfix">
+            <a  href="{:U('addon/WeiSite/WeiSite/Activity_details',array(cate_id=>$get_lanmu[id],post_id=>$vo[id]))}"><div class="yhhd-1-left"><img src="{$vo.cover|get_cover_url}" width="100%" height="" /></div></a>
+            <div class="yhhd-1-right">
+              <div class="yhhd-right-1"></div>
+              <a href="{:U('addon/WeiSite/WeiSite/Activity_details',array(cate_id=>$get_lanmu[id],post_id=>$vo[id]))}"><div class="yhhd-right-2">{$vo.title}</div>
+              <div class="yhhd-right-3">{$vo.intro}</div></a>
+            </div>
+          </div>
+      <else />
+        <div class="yhhd-2 clearfix">
+          <div class="yhhd-left">
+            <div class="yhhd-left-1"></div>
+            <a href="{:U('addon/WeiSite/WeiSite/Activity_details',array(cate_id=>$get_lanmu[id],post_id=>$vo[id]))}"><div class="yhhd-left-2">{$vo.title}</div>
+            <div class="yhhd-left-3">{$vo.intro}</div></a>
+          </div>
+          <a href="{:U('addon/WeiSite/WeiSite/Activity_details',array(cate_id=>$get_lanmu[id],post_id=>$vo[id]))}"><div class="yhhd-right"><img src="{$vo.cover|get_cover_url}" width="100%" height="" /></div></a>
+        </div>
+      </if>
+    </volist>
+ </div>
+  <input type="hidden" id="max_hu_id" value="{$get_max_id}">
+<a onclick="get_more_hd(this)"><div id='mores_hds' class="yhhd-33">加载更多</div></a>
+
+<include file="Public/footer_app"/>
+<script type="text/javascript">
+var shop=0;
+var totalheight = 0; //定义一个总的高度变量
+function  get_more_hd(_obj){
+    var max_hu_id = $("#max_hu_id").val();
+        if (shop == 2) { return false;}
+        $("#mores_hds").html('加载中 ...');
+        shop=2;
+        $.ajax({
+            type: "POST",
+            url: "{:U('addon/MemberCenter/MemberCenter/ajax_activity')}",
+            data:  "max_hu_id=" + max_hu_id,
+            success: function(msg) {
+             var _html='';
+              if (msg['len'] == 1) {
+                $.each(msg.lists, function(i, valus) {
+                    i=i+1;
+                    m=i%2;
+                    if(m != 0){
+                      _html+=' <div class="yhhd-1 clearfix">';
+                      _html+='<a  href="'+valus.urls+'"><div class="yhhd-1-left"><img src="'+valus.cover+'" width="100%" height="" /></div></a>';
+                      _html+='<div class="yhhd-1-right">';
+                      _html+='<div class="yhhd-right-1"></div>';
+                      _html+='<a href="'+valus.urls+'"><div class="yhhd-right-2">'+valus.title+'</div>';
+                      _html+='<div class="yhhd-right-3">'+valus.intro+'</div></a>';
+                      _html+='</div>';
+                      _html+='</div>';
+                    }else{
+                      _html+='<div class="yhhd-2 clearfix">';
+                      _html+='<div class="yhhd-left">';
+                      _html+='<div class="yhhd-left-1"></div>';
+                      _html+='<a href="'+valus.urls+'"><div class="yhhd-left-2">'+valus.title+'</div>';
+                      _html+='<div class="yhhd-left-3">'+valus.intro+'</div></a>';
+                      _html+='</div>';
+                      _html+='<a href="'+valus.urls+'"><div class="yhhd-right"><img src="'+valus.cover+'" width="100%" height="" /></div></a>';
+                      _html+='</div>';
+                    }
+                });
+                  shop=1;
+                  $("#more_hd").append(_html);
+                  $("#mores_hds").html('加载更多');
+                  $("#max_hu_id").val(msg['max_zx_id']);
+
+            }else{
+              shop=2;
+              $("#mores_hds").html('已加载完');
+            }
+
+          }
+        });
+  }
+
+</script>

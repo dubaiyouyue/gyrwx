@@ -1,0 +1,104 @@
+<include file="Public/head_app"/> 
+<div class="dak" style=" padding-bottom:1rem;">
+  <div class="grzl"> <a onclick="javascript:history.back(-1);">
+    <div class="hyjg jfbg">充值-下一步</div>
+    </a> </div>
+    </div>
+    
+<div class="czxyib"> 
+  <div class="yue"></div>
+  <div class="tyecz">
+    <div class="cz-left">请填入预付金额：</div>
+    
+    <div class="cz-right">
+      <div class="cz-k"><input type="text" id="jine"  value="50" style="width: 85%; height: 1.4rem;outline: medium;color: #333;float: left;"></div>
+      <div class="cz-wenzi">元</div>
+    </div>
+  </div>
+  <div class="cz-wenzi-1">当前余额：{$user.yue}元</div>
+  
+</div>
+
+<style type="text/css">
+  .thisstate{border:solid 1px #05befd}
+</style>
+<div class="zffs">
+  <div class="zffs-1">支付方式：<span id="zffsxz"></span></div>
+  <div class="zffs-2">
+    <div onclick="chongzhi('wx',this)" data-type="wx" class="czyue22 thisstate">
+        <div class="czwx"><img src="images/9.png"  /></div>
+        <div class="czwx-1">微信充值</div>
+    </div>
+    <div onclick="chongzhi('zfb',this)" data-type="zfb" class="czyue22" style="margin-top:0.5rem">
+        <div class="czwx"><img src="images/zfb.gif" style="height:1.8rem"   /></div>
+        <div class="czwx-1">支付宝充值</div>
+    </div>
+  </div>
+    <div class="czwx-2">
+       <a onclick="czxyb(this)"> <div class="czwx-3">继续下一步</div></a>
+     </div>
+</div> 
+<include file="Public/footer_app"/> 
+<script type="text/javascript">
+  function chongzhi (types,obj) {
+    $(".czyue22").removeClass('thisstate');
+    $(obj).toggleClass('thisstate');
+   
+  }
+  function czxyb(){
+    var czfs=$(".thisstate").attr('data-type');
+    var jine=$("#jine").val();
+    if(!jine){
+      layer.msg('请输入充值金额');
+      return false;
+    }
+    if(!czfs){
+      layer.msg('请选择充值方式');
+      return false;
+	  
+    }
+    if(jine){
+		//%10===0
+       $.ajax({
+        type: "POST",
+        url: "{:U('addon/MemberCenter/MemberCenter/ajax_recharge')}",
+        data: "cztype=" + czfs+"&jine="+jine,
+        success: function(msg) {
+          if(msg['wxcz']==3){
+            layer.msg('您还未登录，正前往登录...');
+             setTimeout(function(){
+                window.location.href="/index.php?s=/addon/Login/Login/index.html"
+              },3000)
+          }else if(msg['wxcz']==1){
+              layer.msg('请稍后...');
+			  
+              // 微信支付
+              if(czfs=='wx'){
+                  setTimeout(function(){
+					          window.location.href='/index.php?s=/addon/MemberCenter/MemberCenter/weixin_zf/jine/'+jine+'.html';
+                },3000)
+              }
+              // 支付宝支付
+              if(czfs=='zfb'){
+                  setTimeout(function(){
+                    window.location.href="/index.php?s=/addon/Login/Login/index.html"
+                },3000)
+              }
+            
+              
+          }else{
+                layer.msg('充值失败，请稍后重试');
+              }
+                   
+          }
+      });
+    }else{
+       layer.msg('请输入充值金额，金额为10的倍数，如：50');
+       return false;
+    }
+   
+   
+    
+   
+  }
+</script>

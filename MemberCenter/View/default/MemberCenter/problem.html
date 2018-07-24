@@ -1,0 +1,24 @@
+<include file="Public/head_app"/> 
+<!--头部  结束-->
+<div class="dak" style=" background-color:#FFF; padding-bottom:1rem;">
+  <div class="grzl"> <a onclick="javascript:history.back(-1);">
+    <div class="hyjg jfbg" style="margin-top:55px">{$get_lanmu.title}</div>
+    </a> </div>
+  <div class="cpzl-1">
+    <volist name='cj_content' id='vo'>
+      <p onclick="get_xianshi({$vo.id})" data-id="{$vo.id}" style="color:#ED5900; font-size:14px;"><strong><if condition="$i lt 10">0{$i}、<else/>{$i}、</if>{$vo.title}</strong></p>
+      <div id="content_{$vo.id}" <if condition="$i neq 1">style='display:none'</if>><p><strong style=" font-size:14px; color:#333;">答：</strong>{$vo.content}</p></div>
+    </volist>
+  </div>
+    
+  </div>
+ <include file="Public/footer_app"/>
+ <script type="text/javascript">
+    function get_xianshi(getid){
+      if($("#content_"+getid).css("display")=="none"){  
+          $("#content_"+getid).show();
+      }else{  
+          $("#content_"+getid).hide();           
+        }  
+    }
+</script>

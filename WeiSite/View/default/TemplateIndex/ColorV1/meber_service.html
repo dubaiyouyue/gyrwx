@@ -1,0 +1,64 @@
+<include file="Public/head_app"/> 
+<div class="banner5" style=" margin-top:2.1rem;">
+	<if condition="$iconimg">
+		<img src="{$iconimg|get_cover_url}"width="100%" height="" />
+	</if>
+</div>
+<div class="dak"> 
+  <!--banner-->
+   <style type="text/css">
+	.hyzx-1 ul li{height:80px}
+   </style>
+  <div class="rm">
+  <div class="hyzx">
+  <div class="hyzx-1">
+  <ul>
+  	<volist name='meber_nav' id='vo'>
+	  <li class="hyzx-pic1">
+	  	<a href="{$vo.url}">
+	  		<div>
+	  			<p>
+	  				<i>
+	  					<img src="{$vo.icon|get_cover_url}"/>
+	  				</i>
+	  				<span>{$vo.title}</span>
+	  			</p>
+	  		</div>
+	  	</a>
+	  </li>
+	</volist>
+	 <li class="hyzx-pic1">
+	  	<a onclick="xgmmls()">
+	  		<div>
+	  			<p>
+	  				<i>
+	  					<img src="/images/xgmm.png"/>
+	  				</i>
+	  				<span>修改密码</span>
+	  			</p>
+	  		</div>
+	  	</a>
+	  </li>
+  </ul>
+  <div style="clear: both; margin-bottom:1rem;"></div>
+  </div>  
+
+  
+  </div>
+     </div> 
+  
+</div>        
+ <include file="Public/footer_app"/> 
+ <script type="text/javascript">
+  //修改密码
+  function xgmmls(){
+    layer.open({
+    type: 2,
+    title: '修改密码',
+    shadeClose: true,
+    shade: 0.8,
+    area: ['80%', '50%'],
+    content: "{:U('addon/Rpass/Rpass/xgmima')}"
+  }); 
+  }
+</script>

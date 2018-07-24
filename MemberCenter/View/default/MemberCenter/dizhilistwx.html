@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<title></title>
+<script src="/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.min.js"></script>
+<link rel="stylesheet" href="/css/animate.min.css">
+<script type="text/javascript" src="/js/tishicengjsqiu.js"></script>
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="/css/css.css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="/js/src/mobile-select-area.css">
+<script type="text/javascript" src="/js/src/dialog.js"></script>
+<script type="text/javascript" src="/js/src/mobile-select-area.js"></script>
+<script>
+//- 设置html标签font-size
+(function (doc, win) {
+    var _root = doc.documentElement,
+        resizeEvent = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        resizeCallback = function () {
+            var clientWidth = _root.clientWidth,
+                fontSize = 20;
+            if (!clientWidth) return;
+            //if(clientWidth < 640) {
+                fontSize = 20 * (clientWidth / 320);
+            /*} else {
+                fontSize = 20 * (640 / 320);
+            }*/
+            _root.style.fontSize = fontSize + 'px';
+        };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvent, resizeCallback, false);
+    doc.addEventListener('DOMContentLoaded', resizeCallback, false);
+})(document, window);
+</script>
+</head>
+<body <if condition="$bodycss">style="{$bodycss}"<else />style=""</if>>
+<!--头部  结束-->
+<div class="dak" style=" padding-bottom:20px;"></div>
+<div class="dak" id="dzlist"> 
+    <volist name='dzwxlist' id='vo'>
+      <p style="margin:20px 20px 0px 20px;"><input data-id="{$vo.id}" <if condition="$vo[moren] eq 1">checked</if> type="radio" name="dzhi" value="{$vo.xx}"><span style="margin-left:6px;">{$vo.xx}</span></p>
+    </volist>
+   <p onclick="xudizhiwx()"><input style="margin:20px 60px 0px 20px; float:right;width:4rem; height:1.5rem; background-color: #F60;color: #FFF; font-size: 14px;"  type="button" value="确  定"></p>
+</div>
+<script type="text/javascript" src="/js/layer/layer.js"></script>
+</body>
+</html>
+<script>
+var  dzk=1;
+function xudizhiwx(){
+	if(dzk==2){return false;}
+	dzk=2;
+    var dids = $('input[name="dzhi"]:checked ').attr("data-id");
+    if(dids){
+	    $.ajax( {
+	        url:"{:U('addon/MemberCenter/MemberCenter/Ghdzwx')}", //这里是静态页的地址
+	        type: "post", 
+	        data:"dids="+dids,
+	        success: function(msg){
+	          if(msg['gdzl']==1){
+	            layer.msg('更换地址成功');
+	            setTimeout(function(){
+	            	dzk=1;
+	            	setTimeout(' parent.location.reload();',1000);
+	            },3000)  
+	          }else if(msg['gdzl']==2){
+                layer.msg('您还未登录，请先去登录');
+                setTimeout(function(){
+                    dzk=1;
+                    setTimeout(' parent.location.reload();',1000);
+                },3000)  
+              }else{
+	            layer.msg('更换地址失败');
+	            setTimeout(function(){
+	            	dzk=1
+	                setTimeout(' parent.location.reload();',1000);
+	            },3000)  
+	          }
+
+	        }
+	    })
+  }
+}
+</script>

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="textml;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<title>忘记密码（01）</title>
+<!--css start-->
+<link href="css/style.css" rel="stylesheet"/>
+<link href="css/master.css" rel="stylesheet"/>
+<!--css end-->
+<script src="js/jquery-1.11.0.min.js"></script>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body style="padding-bottom:3rem; background:#FFF;">
+	<div class="Login">
+    <div class="zc-logo"><a href="/index.php?s=/addon/WeiSite/WeiSite/index.html"><img src="images/5/zc-logo.png"/></a></div>
+    
+    <h2><strong>忘记密码</strong></h2>
+		<ul>
+        <li>
+        <h3>帐号：</h3>
+  <p class="Code-Pic1">
+					<input type="text" name="tels" id="tels" value="{$users.tel}"  placeholder="手机号" />
+					
+				</p>
+		  </li>
+	  <li class="Login-Btn">
+				<a onclick="zhanghao();" id="zhanghao">确定</a>
+			</li>
+	  </ul>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	function zhanghao(){
+		var tels=$("#tels").val();
+			if(!tels || (tels.length!=7 && tels.length!=11) || isNaN(tels)){
+				alert('请填写正确的手机号','tel');
+				return false;
+			}else{
+				window.location.href='/index.php?s=/addon/Rpass/Rpass/zhanghao/zhanghao/'+tels+'.html'
+			}		
+	}
+</script>

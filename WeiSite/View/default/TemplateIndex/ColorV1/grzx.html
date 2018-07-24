@@ -1,0 +1,77 @@
+
+<div class="data">
+ <div class="submit_box22 clearfix">
+ <form action="/index.php?s=/addon/WeiSite/WeiSite/zlxg.html" method="POST" name="myform" id="myform">
+  <P class="clearfix"><span class="xlf" style="width:23%; display:inline-block; float:left; text-align:right;height: 1.5rem;line-height: 1.5rem;"><span style="color:red;">*</span>昵称：</span><span class="xrg" style="width:77%; display:inline-block; float:right;"><input name="nic" value="{$s.nic}" id="nic" type="text" class="input_txt" /></span></P>
+  
+  <P class="clearfix"><span class="xlf" style="width:23%; display:inline-block; float:left; text-align:right;height: 1.5rem;line-height: 1.5rem;"><span style="color:red;">*</span>真实姓名：</span><span class="xrg" style="width:77%; display:inline-block; float:right;"><input name="xm" id="xm" value="{$s.xm}"  type="text" class="input_txt" /></span></P>
+  
+  <p class="clearfix"><span class="xlf" style="width:23%; display:inline-block; float:left; text-align:right;/*height: 1.5rem;line-height: 1.5rem;*/"><span style="color:red; ">*</span>性别：</span>  
+     <span class="xrg" style="width:77%; display:inline-block; float:right;"><label style="margin-left:2px;">
+        <input name="xb" type="radio" id="RadioGroup1_0" value="男" <?php
+		if($s['xb']=='男' || !$s['xb']) echo 'checked="checked"';?> />
+        男</label>
+     <label style=" margin-left:20px;">
+        <input type="radio" name="xb" value="女" id="RadioGroup1_1" <?php
+		if($s['xb']=='女') echo 'checked="checked"';?> />
+        女</label></span>
+</p>
+<P class="clearfix"><span class="xlf" style="width:23%; display:inline-block; float:left; text-align:right;height: 1.5rem;line-height: 1.5rem;"><span style="color:red;">*</span>邮箱：</span><span class="xrg" style="width:77%; display:inline-block; float:right;"><input name="" readonly="readonly" value="{$s.yx}" type="text" class="input_txt" /></span></P>
+  <P class="clearfix"><span class="xlf" style="width:23%; display:inline-block; float:left; text-align:right;height: 1.5rem;line-height: 1.5rem;"><span style="color:red;">*</span>手机号码：</span><span class="xrg" style="width:77%; display:inline-block; float:right;"><input name="" readonly="readonly" value="{$s.sj}" type="text" class="input_txt" /></span></P>
+  
+</form>
+
+</div>
+ 
+ 
+ 
+ 
+  
+</div>
+           <div class="anniu" style=" margin-left:4.2rem; margin-bottom:1.5rem;"><input class="submit_button" style="width:4.25rem; color:#FFF; height:1.5rem; border:1px solid #2D8E36; background-color: #44AE4E;" name="" type="button" title="提交" value="提交" onclick="checkedformdx();" />
+         <a href="/index.php?s=/addon/WeiSite/WeiSite/xgmm.html" style="
+    margin-left: 12px;
+    text-decoration: underline;
+">修改密码</a>
+
+<a href="/index.php?s=/addon/WeiSite/WeiSite/duiccc.html" style="
+    margin-left: 12px;
+    text-decoration: underline;
+">登出</a>
+         <input class="cancel_button" style="display:none;width:4.25rem; height:1.5rem; border:1px solid #999; margin-left:0.5rem; background-color: #ccc;" name="" type="button" title="取消" value="取消" /></div>
+
+</div>
+
+
+<script>
+<?php
+$ok=$_GET['ok'];
+if($ok=='ok') echo 'alert(\'资料修改成功\');location.href = \'/index.php?s=/addon/WeiSite/WeiSite/grzx.html\';';
+if($ok=='zc') echo 'alert(\'注册成功,请补充填写个人资料\');location.href = \'/index.php?s=/addon/WeiSite/WeiSite/grzx.html\';';
+?>
+
+function checkedformdx(){
+	var nic=$('#nic').val();
+	var xm=$('#xm').val();
+	//var xb=$('#xb').val();
+	
+	if(!nic){
+		document.getElementById('nic').focus();
+		alert('请填写昵称');
+		return false;
+	}
+	if(!xm){
+		document.getElementById('xm').focus();
+		alert('请填写姓名');
+		return false;
+	}
+	/*if(!xb){
+		document.getElementById('xb').focus();
+		alert('请选择性别');
+		return false;
+	}*/
+	document.getElementById('myform').submit();
+}
+</script>
+
+<div class="clearfix"></div>

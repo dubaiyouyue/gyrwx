@@ -1,0 +1,17 @@
+<include file="Public/head_app"/> 
+<div class="dak" style=" background-color:#FFF;">
+  <div class="grzl"> <a onclick="javascript:history.back(-1);">
+    <div class="hyjg jfbg" style="margin-top:55px">{$get_cpyzl_name}</div>
+    </a> </div>
+    
+    
+  <div class="cpzl-1">
+    <volist name="cpzl_content" id='vo'>
+      <p style="color:#ED5900; font-size:14px;"><strong>{$vo.title}</strong></p>
+      {$vo.content}
+    </volist>
+  </div>
+    
+  </div>
+
+<include file="Public/footer_app"/>

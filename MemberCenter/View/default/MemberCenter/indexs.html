@@ -1,0 +1,151 @@
+<include file="Public/head_app"/> 
+  <!----------------------banner 开始--------------> 
+<div class="banner">
+
+<!---------------------------------- container开始 ---------------------------------->
+<!--幻灯片-->
+    <script type="text/javascript" src="js/prefixfree.min.js"></script>
+    <script type="text/javascript" src="js/flipsnap.min.js"></script>
+	<script>
+	var ww=$(window).width();
+	//banner
+	var w=430;
+	var h=280;
+	var b=1;
+	var newsssheigtg=(ww*b*h)/w;
+new_widht_baifenbi_kuandu=1;
+var xiaoxunews=ww-(182/360)*ww;
+document.write("<style>.index-h-l-wenzi{width:"+xiaoxunews+"px;top: 50%;}</style>");
+
+</script>
+    <script type="text/javascript" src="js/mobile_module.js"></script>
+    <script type="text/javascript" src="js/admin_common.js"></script>
+<div class="container" >
+            <section class="banner">
+                <ul>
+                    <volist name='slideshow' id='vo'>
+                      <li><a href="#"><img src="{$vo.img}"></a></li>
+                    </volist>
+
+						</ul>
+        <span class="identify">
+          <volist name='slideshow' id='vo'>
+            <em ></em>
+          </volist>
+        
+		</span>
+            </section></div><script type="text/javascript">
+    $(function(){
+        $.WeiPHP.initBanner(true,5000);
+        $.WeiPHP.setRandomColor('.random_color');
+    })
+</script>
+<!--幻灯片-->
+<!---------------------------------- container结束 ---------------------------------->
+
+
+
+
+
+</div>
+<!----------------------banner 开始--------------> 
+<!----------------------导航 开始-------------->
+
+<div class="lstubiao">
+  <ul class="lstubiao-kk clearfix">
+    <a href="{:U('addon/WeiSite/WeiSite/about',array(cate_id=>31))}">
+    <li class="guanyu" style="margin-right:0.15rem;">关于我们</li>
+    </a> <a href="{:U('addon/WeiSite/WeiSite/Meber_service',array(cate_id=>38))}">
+    <li class="huiyuan" style="margin-right:0.15rem;">会员服务</li>
+    </a> <a href="{:U('addon/WeiSite/WeiSite/Contact',array(cate_id=>32))}">
+    <li class="zixun" style="margin-right:0.15rem;">最新资讯</li>
+    </a> <a href="{:U('addon/WeiSite/WeiSite/Customer')}">
+    <li class="kefu" style="margin-right:0.15rem;">客服中心</li>
+    </a>
+  </ul>
+</div>
+
+<!----------------------导航 结束--------------> 
+
+<!----------------------搜索框 结束-------------->
+<div class="nvz-sho">
+  <div class="sho-left">
+    <p>搜索品牌、商品</p>
+  </div>
+  <div class="sho1-right">
+    <p><a href="#">搜索</a></p>
+  </div>
+</div>
+<!----------------------搜索框 结束--------------> 
+
+<!----------------------优惠活动 开始-------------->
+
+<div class="syyou" style="background-color:#FFF; width:100%; height:3.5rem; margin-top:0.5rem;">
+  <div class="youhhd-tou1">
+    <div class="yhhd-344">优惠活动</div>
+    <p>FAVOURABLE ACTIVITY</p>
+  </div>
+</div>
+<div class="yyhd-2">
+  <div class="yhhd-3"> <a href="#">
+    <div class="yhhd-1-1"><img src="images/3_r1_c1_s1.jpg" width="100%" height="" /></div>
+    </a> <a href="#">
+    <div class="yhhd-1-2"><img src="images/3_r2_c3_s1.jpg" width="100%" height="" /></div>
+    </a> <a href="#">
+    <div class="yhhd-1-3"><img src="images/3_r1_c8_s1.jpg" width="100%" height="" /></div>
+    </a> </div>
+  <div class="clearfix"></div>
+  <div class="yhhd-4"> <a href="#">
+    <div class="yhhd-4-1">更多惊喜</div>
+    </a> </div>
+</div>
+<div class="syyou1" style="background-color:#FFF; width:100%; height:3.5rem; margin-top:0.5rem;">
+  <div class="youhhd1-tou">
+    <div class="yhhd1-1">热销单品</div>
+    <p>HOT ITEM</p>
+  </div>
+</div>
+<div class="rx">
+  <div class="rx-1"> <a href="#">
+    <div class="rxdp1">
+      <div class="rxdp-pic1"><img src="images/2_r1_c1_s1.jpg" width="100%" height="" /></div>
+      <p style=" font-size:14px; color:#666; margin-top:0.5rem; margin-left:0.5rem;">女装夏圆领</p>
+      <strong>￥290.00</strong> </div>
+    </a> <a href="#">
+    <div class="rxdp2">
+      <div class="rxdp-pic2"><img src="images/2_r1_c4_s1.jpg" width="100%" height="" /></div>
+      <p style=" font-size:14px; color:#666; margin-top:0.5rem; margin-left:0.5rem;">女装夏圆领</p>
+      <strong>￥290.00</strong> </div>
+    </a> <a href="#">
+    <div class="rxdp5">
+      <div class="rxdp-pic5"><img src="images/2_r4_c4_s1.jpg" width="100%" height="" /></div>
+      <p style=" font-size:14px; color:#666; margin-top:0.5rem; margin-left:0.5rem;">女装夏圆领</p>
+      <strong>￥290.00</strong> </div>
+    </a> <a href="#">
+    <div class="rxdp6">
+      <div class="rxdp-pic6"><img src="images/2_r5_c1_s1.jpg" width="100%" height="" /></div>
+      <p style=" font-size:14px; color:#666; margin-top:0.5rem; margin-left:0.5rem;">女装夏圆领</p>
+      <strong>￥290.00</strong> </div>
+    </a>
+    <div class="clearfix"></div>
+    <a href="#">
+    <div class="rxdp1">
+      <div class="rxdp-pic1"><img src="images/2_r1_c1_s1.jpg" width="100%" height="" /></div>
+      <p style=" font-size:14px; color:#666; margin-top:0.5rem; margin-left:0.5rem;">女装夏圆领</p>
+      <strong>￥290.00</strong> </div>
+    </a> <a href="#">
+    <div class="rxdp2">
+      <div class="rxdp-pic2"><img src="images/2_r1_c4_s1.jpg" width="100%" height="" /></div>
+      <p style=" font-size:14px; color:#666; margin-top:0.5rem; margin-left:0.5rem;">女装夏圆领</p>
+      <strong>￥290.00</strong> </div>
+    </a> <a href="#">
+    <div class="rx-gd">
+      <p>更多惊喜 >></p>
+    </div>
+    </a>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<!----------------------优惠活动 结束--------------> 
+<include file="Public/footer_app"/>  

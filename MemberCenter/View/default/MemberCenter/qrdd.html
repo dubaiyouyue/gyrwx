@@ -1,0 +1,142 @@
+<include file="Public/head_app"/> 
+<div class="dak" style=" background-color:#F4F4F4; padding-bottom:1rem;">
+	<div class="grzl" >
+	  	<a onclick="javascript:history.back(-1);"><div class="hyjg jfbg" style="margin-top:55px">确认订单</div></a> 
+	</div>
+    <div class="qrdd1">
+      	<div class="qrdd-1">
+    		
+    		<p>收货人：<if condition="$ddzzwx[xm]">{$ddzzwx.xm}<else />{$user.name}</if></p>
+  			<p>联系电话：<if condition="$ddzzwx[tel]">{$ddzzwx.tel}<else />{$user.tel}</if></p>
+			<p>地址：{$ddzzwx.xx} <span style="color:#fe5400" onclick="qrddwxdz()">【更换地址】</span><if condition="!$ddzzwx[xx]"><span style="color:#fe5400" onclick="addqqrdzwx()">【添加地址】</span></if></p>
+
+  		</div>
+    </div>
+    <volist name="da_list" id='vo'>
+	    <a href="{:U('addon/WeiSite/WeiSite/Goods_detail',array(id=>$vo[shipping_id]))}"><div class="qrdd-sj1">
+	        <div class="qrdd-sj-1"><img src="{$vo.product_thumb|get_cover_url}" width="100" height="" /></div>
+	        <div class="qrdd-sj-2">
+	          	<div class="qrdd22-wenzi">
+	         		<p>{$vo.shipping_name|msubstr=0,80}</p>
+					<p style="margin-bottom:0rem; color:#F00; float:left;">￥{$vo.product_price}</p>
+					<p style="margin-bottom:0rem; color:#F00; float:right; margin-right:0.5rem">x{$vo.number}</p>
+	         	</div>
+	        </div>
+	    </div></a>
+	</volist>
+	<?php 	
+    	$nowdikou=number_format(($user['jifen']/$pall['jifendikou']), 2);//2017.01.16 保留两位小数
+    	$sumes=$sum+$pall['youfei'];
+			if($nowdikou-1>=$sumes){
+				$syjf=($nowdikou-$sumes+1)*$pall['jifendikou'];   //获取剩余积分
+				$khjf=$user['jifen']-$syjf;           //获取最大限度可使用的积分
+			}
+				 ?>
+    <div class="qrdd-4" style="margin-top:1rem;">
+     	<p style="line-height:2.5rem; margin-left:0.5rem; float:left;">配送方式</p>
+     	<p style="line-height:2.5rem; margin-right:0.5rem; float:right;">运费￥<if condition="$pall[youfei]">{$pall.youfei}<else />0</if></p><!-- 2017.01.16 -->
+    </div>
+    <div class="qrdd-4">
+     	<p style="line-height:2.5rem; margin-left:0.5rem; float:left;">合计价钱</p>
+     	<p style="line-height:2.5rem; margin-right:0.5rem; color:#F00; float:right;">￥{$sumes}</p>
+    </div>
+    <a > <div class="qrdd-4">
+    	
+     	<p style="line-height:2.5rem; margin-left:0.5rem; float:left;">共{$user.jifen}可使用积分{$khjf}兑换￥<?php
+			$nowdikou=number_format(($khjf/$pall['jifendikou']), 2);//2017.01.16 保留两位小数
+		
+			echo $nowdikou;//积分抵扣金额
+			// 1元等于多少积分 jifendikou $pall['jifendikou']
+		?>元</p>
+       	<p  onclick="jinfenkuih()"  style=" margin-right:0.5rem; float:right; margin-top:0.8rem;"><span style="color:#8c8888" id='djsy'>点击使用</span><img id="isduihuan" style="display:none"  src="images/45.png" width="21" height="21" /></p>
+    </div></a>
+    <div class="Login1">
+		<ul>
+	        <li>
+	  		<p class="Code-Pic-1">
+				<input type="text" id="fjxx" name="fjxx" placeholder="订单补充留言" />
+			</p>
+			</li>
+		</ul>
+		<!-- href="{:U('addon/MemberCenter/MemberCenter/Cgtjdd')}" -->
+	</div>
+	<input type="hidden" id="kyji" value="{$khjf}">
+	<div ><a onclick="qrddxyb(this)"  id="nexts" style="width:100%; display:block; text-align:center; line-height:36px;  height:36px; background-color:#ff662d;color:#fff;font-size:1.5em;">下一步</a></div>
+<include file="Public/footer_app"/>  
+ <script type="text/javascript">
+	function tishicengjsqiuonclick(textwz,nicheng){
+	    $('body').tishicengjsqiu({
+	      textwz:  textwz, //提示层文字 支持html
+	      tishicbj: '#ff662d', //提示层背景 #ddd
+	      colors: '#fff', //文字颜色
+	      iddtt:3, //自动关闭时间秒
+	      admmint:'flipInX', //显示动画
+	      //动画属性说明
+	      admmout:'zoomOut' //隐藏动画
+	    });
+	    document.getElementById(nicheng).focus();
+	}
+ 	function qrddxyb () {
+ 		tishicengjsqiuonclick('正在提交请稍后...','nexts');
+ 		var jifen=$('#kyji').val();
+ 		if($("#isduihuan").is(":hidden")){
+			jifen=0;
+		}else{
+			jifen=$('#kyji').val();
+		}
+ 		var fjxx=$('#fjxx').val();
+ 		
+ 		var tj='tj';
+ 		$.ajax({
+		    type: "POST",
+		    url: "{:U('addon/MemberCenter/MemberCenter/Cgtjdd')}",
+		     data:"fjxx=" + fjxx+"&tj="+tj+"&jifen="+jifen,
+		    success: function(msg) {
+		        if(msg['is']==1){
+		            tishicengjsqiuonclick('订单提交成功','nexts');
+		            setTimeout(function(){
+		              window.location.href="{:U('addon/MemberCenter/MemberCenter/Cgtjdd')}"
+		            },3000)
+		        }else if(msg['is']==3){
+		            tishicengjsqiuonclick('您还未登录，正前往登录...','nexts');
+		             setTimeout(function(){
+                        window.location.href="/index.php?s=/addon/Login/Login/index.html"
+                      },3000)
+		        }else{
+		        	tishicengjsqiuonclick('提交失败，请稍后重试','nexts');
+		        }
+		    }
+    	});
+ 	}
+
+ 	function qrddwxdz(){
+      layer.open({
+        type: 2,
+        title: '更换地址',
+        shadeClose: true,
+        shade: 0.8,
+        area: ['90%', '90%'],
+        content: "{:U('addon/MemberCenter/MemberCenter/Dizhilistwx')}"
+      }); 
+    }
+  //添加地址
+  function addqqrdzwx(){
+    layer.open({
+    type: 2,
+    title: '添加新地址',
+    shadeClose: true,
+    shade: 0.8,
+    area: ['90%', '90%'],
+    content: "{:U('addon/MemberCenter/MemberCenter/newsaddress')}"
+  }); 
+  }
+  function jinfenkuih(){
+  	// alert()
+  	$("#isduihuan").toggle();
+  	if($("#isduihuan").is(":hidden")){
+			$("#djsy").show();    //如果元素为隐藏,则将它显现		
+		}else{
+			$("#djsy").hide();     //如果元素为显现,则将其隐藏
+		}
+  }
+ </script>

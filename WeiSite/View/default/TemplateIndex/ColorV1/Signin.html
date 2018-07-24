@@ -1,0 +1,124 @@
+<form action="" method="POST" name="myform" id="myform">
+
+	<div class="Login">
+		<ul>
+        
+        <li>
+  <p class="Code-Pic1">
+					<input type="text" name="sj" id="sj" placeholder="手机号" />
+					
+				</p>
+		  </li>
+        
+        
+	  
+        <li>
+				<p>
+					<input type="password" name="pass" id="pass" placeholder="密码" />
+		  </p>
+			</li><li>
+<p class="Code-Btn">
+					<input type="text" id="yzm" name="yzm" placeholder="验证码" />
+					<a><img onclick="this.src='/cachec/yzm.php?a=showseccode&update=' + Math.random()" src="/cachec/yzm.php" width="100%" height="100%"></a>
+				</p>
+			</li>
+			
+			<li class="QuickBtn">
+				<a href="/index.php?s=/addon/WeiSite/WeiSite/wjmm.html">忘记密码？</a>
+				<a style="
+    margin-left: 18px;
+" href="/index.php?s=/addon/WeiSite/WeiSite/register.html">未有账号？马上注册</a>
+			</li>
+			<li class="Login-Btn" style="margin-bottom:2rem;">
+				<a onclick="checkedformdx();" id="liqidonglu">立即登陆</a>
+			</li>
+			
+		</ul>
+	</div>
+
+
+
+
+</form>
+<script>
+<?php
+$ok=$_GET['ok'];
+if($ok=='ok') echo 'alert(\'新密码已经发送到邮箱\');';
+?>
+function checkedformdx(){
+	var sj=$('#sj').val();
+	var pass=$('#pass').val();
+	var yzm=$('#yzm').val();
+	
+	if(!sj){
+		document.getElementById('sj').focus();
+		alert('请填写手机号');
+		return false;
+	}
+	if(!pass){
+		document.getElementById('pass').focus();
+		alert('请填写密码');
+		return false;
+	}
+	if(!yzm){
+		document.getElementById('yzm').focus();
+		alert('请填写验证码');
+		return false;
+	}
+	//document.getElementById('myform').submit();
+	tj(sj,pass,yzm);
+}
+function tj(sj,pass,yzm){
+	$.ajax({
+		url: '/index.php?s=/addon/WeiSite/WeiSite/dlpost/sj/'+sj+'/pass/'+pass+'/yzm/'+yzm+'.html', //这里是静态页的地址
+		type: "GET", //静态页用get方法，否则服务器会抛出405错误
+		//dataType: "json",
+		//cache: false,
+		//async: false,
+		beforeSend: function(){
+		 // Handle the beforeSend event
+			document.getElementById("liqidonglu").onclick = function(){};
+			$('#liqidonglu').html('正在登录...');
+		},
+		success: function(data){
+			//document.getElementById("liqidonglu").onclick = checkedformdx();
+			if(data=='e1'){
+				//$('#yzm').val('');
+				alert('验证码错误');
+				$('#liqidonglu').html('立即登陆');
+				$("#liqidonglu").attr("onclick","checkedformdx();");
+			}
+			if(data=='e2'){
+				//$('#yzm').val('');
+				alert('手机号没有注册');
+				$('#liqidonglu').html('立即登陆');
+				$("#liqidonglu").attr("onclick","checkedformdx();");
+			}
+			if(data=='e3'){
+				//$('#yzm').val('');
+				alert('密码错误');
+				$('#liqidonglu').html('立即登陆');
+				$("#liqidonglu").attr("onclick","checkedformdx();");
+			}
+			if(data=='e4'){
+				//$('#yzm').val('');
+				alert('服务器繁忙');
+				$('#liqidonglu').html('立即登陆');
+				$("#liqidonglu").attr("onclick","checkedformdx();");
+			}
+			if(data=='ok'){
+				//$('#yzm').val('');
+				alert('登录成功');
+				location.href = '/index.php?s=/addon/WeiSite/WeiSite/grzx.html';
+				//$('#liqidonglu').html('立即登陆');
+				//$("#liqidonglu").attr("onclick","checkedformdx();");
+			}
+			//var result = $(data).find("另一个html页面的指定的一部分").html();
+		}
+	});
+}
+</script>
+
+
+
+<div class="clearfix"></div>

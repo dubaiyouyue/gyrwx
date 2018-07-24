@@ -1,0 +1,35 @@
+<include file="Public/head_app"/> 
+<!--头部  结束-->
+<div class="dak" style=" padding-bottom:1rem;">
+  <div class="grzl"> <a onclick="javascript:history.back(-1);">
+    <div class="hyjg jfbg" style="margin-top: 55px;">充值</div>
+    </a> </div>
+    </div>    
+    
+  <div class="cz">
+  <div class="cz-1">
+    <div class="cz-mr" style="width:60%">
+      <p>账户余额：<strong>{$user.yue}元</strong></p><!-- balance -->
+    </div>
+      <div class="cz-2"><a href="{:U('addon/MemberCenter/MemberCenter/recharge_next')}">在线充值</a></div>
+    
+  </div>
+  
+    <div class="cz-3">
+      <div class="cz-xfjl">消费记录：</div>
+      <div class="cz-sj">
+        <div class="cz-sj-1" style="text-align:center" ><strong>时间</strong></div>
+        <div class="cz-sj-2" style="width: 30%;text-align:center"><strong>收入/支出</strong></div>
+        <div class="cz-sj-3" style="width: 30%;text-align:center"><strong>明细</strong></div>
+      </div>
+      <volist name='myjl' id='vo'>
+        <div class="cz-sj1">
+           <div class="cz-sj-1" style="color:#666;text-align:center">{$vo.ctime}</div>
+           <div class="cz-sj-2" style="color:#666; width: 30%;text-align:center"><if condition="$vo[gtype] eq 2">+<else />-</if>{$vo.je}</div>
+           <div class="cz-sj-3" style="color:#666; width: 30%;text-align:center"><if condition="$vo[gtype] eq 2">在线充值<else />购买商品</if></div>
+        </div>
+      </volist>
+    </div>
+</div>
+ <div class="clearfix"></div>
+ <include file="Public/footer_app"/>

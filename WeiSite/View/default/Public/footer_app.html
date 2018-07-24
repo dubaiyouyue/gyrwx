@@ -1,0 +1,84 @@
+<!----------------------------foom 开始-->
+<if condition="empty($mebers)">
+<div class="clearfix"></div>
+<div class="foom" style="margin-bottom:65px;">
+  <div class="foom-2"></div>
+  <div class="foom-1">
+    <p>{$config.title} 技术支持：<a href="http://www.resonance.com.cn/" target="_blank">广西共振广告</a></p><!-- {$config.title} -->
+  </div>
+</div>
+</if>
+<!--↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓3列菜单开始↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓-->
+<div class="btn3 clearfix">
+  <div class="menu" style="width:22%;">
+    <a href="{$normal_tips}"><div class="bt-name"><img src="images/db-sy.png" width="28" height="27" /></div></a>
+  </div>
+  <div class="menu">
+    <div class="bt-name">≡ 分类</div>
+    <div class="new-sub">
+      <ul >
+        <li><a href="{:U('addon/WeiSite/WeiSite/goods_list')}">新品上市</a></li>
+        <li><a href="{:U('addon/WeiSite/WeiSite/Gwlc',array(cate_id=>78))}">购物流程</a></li>
+      </ul>
+      <div class="tiggle"></div>
+      <div class="innertiggle"></div>
+    </div>
+  </div>
+  <div class="menu">
+    <div class="bt-name">≡ 活动</div>
+    <div class="new-sub">
+      <ul >
+        <li><a href="{:U('addon/WeiSite/WeiSite/Activity',array(cate_id=>43))}">优惠活动</a></li>
+      </ul>
+      <div class="tiggle"></div>
+      <div class="innertiggle"></div>
+    </div>
+  </div>
+  <div class="menu">
+    <div class="bt-name">≡ 我的</div>
+    <div class="new-sub">
+      <ul >
+        <li><a href="{:U('addon/MemberCenter/MemberCenter/Personal_data',array(cate_id=>40))}">个人资料</a></li>
+        <li><a href="{:U('addon/MemberCenter/MemberCenter/Collection',array(cate_id=>47))}" >我的收藏</a></li>
+        <li><a href="{:U('addon/MemberCenter/MemberCenter/Address',array(cate_id=>46))}" >收货地址</a></li>
+        <li><a href="{:U('addon/MemberCenter/MemberCenter/Shopping')}" >购物车</a></li>
+        <li><a href="{:U('addon/MemberCenter/MemberCenter/Orders_qry')}" >我的订单</a></li>
+        <li><a onclick="xiugaimm()" >修改密码</a></li>
+      </ul>
+      <div class="tiggle"></div>
+      <div class="innertiggle"></div>
+    </div>
+  </div>
+  <!------------------------foom 结束-->  
+</div>
+<script type="text/javascript" src="/js/layer/layer.js"></script>
+<!--↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑3列菜单end↑↑↑↑↑↑↑↑↑↑↑↑↑↑--> 
+<script type="text/javascript">
+//弹出垂直菜单
+$(".menu").click(function() {
+    if ($(this).hasClass("cura")) {
+        $(this).children(".new-sub").hide(); //当前菜单下的二级菜单隐藏
+        $(".menu").removeClass("cura"); //同一级的菜单项
+    } else {
+        $(".menu").removeClass("cura"); //移除所有的样式
+        $(this).addClass("cura"); //给当前菜单添加特定样式
+        $(".menu").children(".new-sub").slideUp("fast"); //隐藏所有的二级菜单
+        $(this).children(".new-sub").slideDown("fast"); //展示当前的二级菜单
+    }
+});
+</script>
+</body>
+</html>
+<script type="text/javascript">
+  //修改密码
+  function xiugaimm(){
+    layer.open({
+    type: 2,
+    title: '修改密码',
+    shadeClose: true,
+    shade: 0.8,
+    area: ['80%', '50%'],
+    content: "{:U('addon/Rpass/Rpass/xgmima')}"
+  }); 
+  }
+</script>

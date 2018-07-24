@@ -1,0 +1,166 @@
+<include file="Public/head_app"/> 
+  <!----------------------banner 开始--------------> 
+<div class="banner" style="padding-top: 2.1rem;">
+
+<!---------------------------------- container开始 ---------------------------------->
+<!--幻灯片-->
+<script type="text/javascript" src="js/prefixfree.min.js"></script>
+<script type="text/javascript" src="js/flipsnap.min.js"></script>
+<script>
+	var ww=$(window).width();
+	//banner
+	var w=430;
+	var h=280;
+	var b=1;
+	var newsssheigtg=(ww*b*h)/w;
+new_widht_baifenbi_kuandu=1;
+var xiaoxunews=ww-(182/360)*ww;
+document.write("<style>.index-h-l-wenzi{width:"+xiaoxunews+"px;top: 50%;}</style>");
+</script>
+    <script type="text/javascript" src="js/mobile_module.js"></script>
+    <script type="text/javascript" src="js/admin_common.js"></script>
+    <div class="container" >
+      <section class="banner">
+        <ul>
+          <volist name='slideshow' id='vo'>
+              <li><a ><img src="{$vo.img}"></a></li>
+          </volist>
+        </ul>
+        <span class="identify" style="margin-left: -39px;">
+          <volist name='slideshow' id='vo'>
+              <em ></em>
+          </volist>
+        </span>
+      </section>
+    </div>
+<script type="text/javascript">
+    $(function(){
+        $.WeiPHP.initBanner(true,5000);
+        $.WeiPHP.setRandomColor('.random_color');
+    })
+</script>
+<!--幻灯片-->
+<!---------------------------------- container结束 ---------------------------------->
+</div>
+<!----------------------banner 开始--------------> 
+<!----------------------导航 开始-------------->
+
+<div class="lstubiao">
+  <ul class="lstubiao-kk clearfix">
+    <a href="{:U('addon/WeiSite/WeiSite/about',array(cate_id=>31))}">
+    <li class="guanyu" style="margin-right:0.15rem;">关于我们</li>
+    </a> <a href="{:U('addon/WeiSite/WeiSite/Meber_service',array(cate_id=>38))}">
+    <li class="huiyuan" style="margin-right:0.15rem;">会员服务</li>
+    </a> <a href="{:U('addon/WeiSite/WeiSite/Contact',array(cate_id=>32))}">
+    <li class="zixun" style="margin-right:0.15rem;">最新资讯</li>
+    </a> <a href="{:U('addon/WeiSite/WeiSite/Customer')}">
+    <li class="kefu" style="margin-right:0.15rem;">客服中心</li>
+    </a>
+  </ul>
+</div>
+
+<!----------------------导航 结束--------------> 
+
+<!----------------------搜索框 结束-------------->
+<div class="nvz-sho">
+  <form> 
+  <div class="sho-left">
+    <!-- <input style="height:1.5rem; width:80%; float: left" type='text' name='search'> -->
+    <p><input name='wxtitle' id='wxtitle' style="height: 1.4rem; line-height: 1.4rem; width:100%;outline:medium; background-color: #f9f9f9; color:#858282" type="text" placeholder="搜索品牌、商品"></p>
+  </div>
+  <div class="sho1-right">
+    <p><a onclick="wxsearch()">搜索</a></p>
+  </div>
+   </form>
+</div>
+<!----------------------搜索框 结束--------------> 
+
+<!----------------------优惠活动 开始-------------->
+
+<div class="syyou" style="background-color:#FFF; width:100%; height:3.5rem; margin-top:0.5rem;">
+  <div class="youhhd-tou1">
+    <div class="yhhd-344">{$get_lanmu.title}</div>
+    <p>FAVOURABLE ACTIVITY</p>
+  </div>
+</div>
+<div class="yyhd-2">
+  <div class="yhhd-3"> 
+    <volist name='hd_content' id='vo'>
+      <a href="{:U('addon/WeiSite/WeiSite/Activity_details',array(cate_id=>$get_lanmu[id],post_id=>$vo[id]))}"><div class="yhhd-1-{$i}"><img src="{$vo.cover|get_cover_url}" width="100%" height="" /></div></a> 
+    </volist>
+  </div>
+  <div class="clearfix"></div>
+  <div class="yhhd-4"> <a href="{:U('addon/WeiSite/WeiSite/Activity',array(cate_id=>43))}">
+    <div class="yhhd-4-1">更多惊喜</div>
+    </a> </div>
+</div>
+<div class="syyou1" style="background-color:#FFF; width:100%; height:3.5rem; margin-top:0.5rem;">
+  <div class="youhhd1-tou">
+    <div class="yhhd1-1">热销单品</div>
+    <p>HOT ITEM</p>
+  </div>
+</div>
+<style type="text/css">
+  .rxdpll{
+    width: 100%;
+    display: block; 
+    float: left;
+    border: 1px solid #E1E1E1;
+   }
+  .stylep{
+    font-size:14px; color:#666; margin-top:0.5rem; margin-left:0.5rem; margin-right:0.5rem; overflow:hidden
+  }
+  .shuzi{
+    font-size: 14px;
+    color: #000;
+    margin-top: 0.75rem;
+    margin-left: 0.5rem;
+    overflow:hidden;
+  }
+</style>
+<div class="rx">
+  <div class="rx-1" style="width:100%">
+    <ul style="float: left;width:100%;"> 
+      <volist name="hot_goods" id='vo'>
+          <li style="float: left;width:45%;display:block; margin: 0rem 0rem 0.5rem 0.5rem;display:inline"><a href="{:U('addon/WeiSite/WeiSite/Goods_detail',array(id=>$vo[id]))}">
+          <div class="rxdpll" style="padding-bottom:10px">
+          <div class="rxdp-pic1"><img src="{$vo.cover|get_cover_url}" width="100%" style="height:9rem" /></div>
+          <p class="stylep">{$vo.title|msubstr=0,10}</p>
+          <strong class="shuzi">￥{$vo.price}</strong> </div> 
+        </a></li>
+      </volist>
+    </ul>
+    <a href="{:U('addon/WeiSite/WeiSite/Goods_list',array(wdhot=>hot))}">
+      <div style="margin-bottom: 0.5rem;width: 15rem; height:1.5rem " class="rx-gd">
+        <p>更多惊喜 >></p>
+      </div>
+    </a>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<!----------------------优惠活动 结束--------------> 
+<include file="Public/footer_app"/> 
+<script type="text/javascript">
+   function tishicengjsqiuonclick(textwz,nicheng){
+    $('body').tishicengjsqiu({
+      textwz:  textwz, //提示层文字 支持html
+      tishicbj: '#ff662d', //提示层背景 #ddd
+      colors: '#fff', //文字颜色
+      iddtt:3, //自动关闭时间秒
+      admmint:'flipInX', //显示动画
+      //动画属性说明
+      admmout:'zoomOut' //隐藏动画
+    });
+    document.getElementById(nicheng).focus();
+  }
+  function wxsearch(){
+    var wds=$('#wxtitle').val();
+    if(wds.length<0||!wds){
+      tishicengjsqiuonclick('请输入搜索内容','wxtitle'); return false;
+    }
+   
+    window.location.href="/index.php?s=/addon/WeiSite/WeiSite/Searchs/wds/"+wds+'.html'; //  /index.php?s=/addon/Rpass/Rpass/zhanghao/zhanghao/'+tels+'.html'
+   
+  }
+</script>

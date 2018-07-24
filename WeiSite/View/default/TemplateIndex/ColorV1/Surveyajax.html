@@ -1,0 +1,20 @@
+<?php
+	$kccc=count($list);
+?>
+  <volist name="list" id="vo">
+  
+    <div class="xmys-pic1" style="margin-top:1rem;<?php
+	$kkk++;
+	if(!($kkk%2)) echo 'margin-left:4%;';
+	if($kkk==$kccc) echo '/*border-bottom:none;*/margin-bottom:1rem;';
+	if(!($kccc%2)){
+		if($kkk==($kccc-1)) echo '/*border-bottom:none;*/margin-bottom:1rem;';
+	}
+  ?>">
+      <a href="/index.php?s=/addon/WeiSite/WeiSite/yqymnry/cate_id/{$vo.cate_id}/id/{$vo.id}.html"><div class="xmys-tupian1"><img src="{$vo.cover|get_cover_url}" width="100%" height="" /></div></a>
+      <a href="/index.php?s=/addon/WeiSite/WeiSite/yqymnry/cate_id/{$vo.cate_id}/id/{$vo.id}.html"><div class="xmys-wenzi">{$vo.title}</div></a>
+      
+    </div>
+    
+  
+  </volist>

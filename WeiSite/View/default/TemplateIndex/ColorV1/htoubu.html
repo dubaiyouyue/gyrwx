@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="textml;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+
+
+<title>{$site_title}-{$config.title}</title>
+
+
+<!---------- css 开始----------->
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/css.css" rel="stylesheet" type="text/css" />
+<!---------- css 结束----------->
+
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.min.js"></script>
+<script>
+//- 设置html标签font-size
+(function (doc, win) {
+    var _root = doc.documentElement,
+        resizeEvent = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        resizeCallback = function () {
+            var clientWidth = _root.clientWidth,
+                fontSize = 20;
+            if (!clientWidth) return;
+            //if(clientWidth < 640) {
+                fontSize = 20 * (clientWidth / 320);
+            /*} else {
+                fontSize = 20 * (640 / 320);
+            }*/
+            _root.style.fontSize = fontSize + 'px';
+        };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvent, resizeCallback, false);
+    doc.addEventListener('DOMContentLoaded', resizeCallback, false);
+})(document, window);
+</script>
+
+
+<style>
+
+
+
+</style>
+
+</head>
+
+<body>
+<div class="top">
+  <div class="top-left">
+    <div class="menu" style=" margin-top:0.75rem; margin-left:0.5rem;"><a href="javascript:;" id="open"><img src="images/dh-top.png" /></a></div>
+    
+    
+    <div class="ppptcdiv">
+	<ul>
+		<li><a href="/index.php?s=/addon/WeiSite/WeiSite/index.html" class="parent-element-1">首页</a></li>
+		<li><a href="/index.php?s=/addon/WeiSite/WeiSite/Survey/cate_id/2.html" class="parent-element-3">园区概况</a></li>
+		<li><a href="/index.php?s=/addon/WeiSite/WeiSite/dynamic/cate_id/8.html" class="parent-element-5">园区动态</a></li>
+		<li><a href="/index.php?s=/addon/WeiSite/WeiSite/investment/cate_id/13.html" class="parent-element-7">招商营销</a></li> 
+		<li><a href="/index.php?s=/addon/WeiSite/WeiSite/service/cate_id/19.html" class="parent-element-9">服务中心</a></li>
+		<li><a href="/index.php?s=/addon/WeiSite/WeiSite/grzx.html" class="parent-element-11">会员中心</a></li>
+        <li><a href="/index.php?s=/addon/WeiSite/WeiSite/lxwm.html" class="parent-element-14">联系我们 </a></li>
+        <li><a href="/index.php?s=/addon/WeiSite/WeiSite/wly.html" class="parent-element-15">微留言</a></li>
+       
+	</ul>
+	<span class="parent-element-x" id="colsoe" onclick="cloos();"></span>
+</div>
+<div id="ppptcdiv-ddd" onclick="cloos();"></div>
+<!--js-->
+<script>
+$(document).ready(function() {
+	
+    $('#open').click(function() {
+        $('.ppptcdiv').animate({left:'0px'},800);
+		$('#ppptcdiv-ddd').css('display','block');
+    });
+});
+function cloos(){
+	$('.ppptcdiv').animate({left:'-225px'},800);
+	$('#ppptcdiv-ddd').css('display','none');
+}
+</script>
+<style>
+/*利用:after伪元素*/  
+.clearUl:after {  
+content:"";
+display: block;  
+clear: both;  
+}
+</style>
+    
+  </div>
+  
+  
+  
+  
+  <div class="top-middle">
+    <a href="/index.php?s=/addon/WeiSite/WeiSite/index.html"><div class="top-logo"><img src="images/dh-logo1.png" /></div></a>
+  </div>
+  <div class="top-right">
+    <a href="/index.php?s=/addon/WeiSite/WeiSite/grzx.html"><div class="top-dr"><img src="images/dh-dr.png" width="21" height="23" /></div></a>
+  </div>
+</div><volist name="zlmcategory" id="voimg">
+<?php
+	if($voimg['id']==$cate_id){ 
+	if($voimg['icon']){
+?>
+<div class="banner2" style="margin-top: 56px;"><img src="{$voimg.icon|get_cover_url}" width="100%" height="" /></div>
+<?php 
+}else{
+	echo '<div class="banner2" style="margin-top: 56px;"><img src="/images/banner7_s1.jpg" width="100%" height="" /></div>';
+}
+}
+	$pidlm=array(
+		1=>'Survey',
+		18=>'Survey',
+		26=>'Survey',
+		22=>'Survey',
+		12=>'investment',
+		7=>'dynamic'
+	);
+?>
+</volist><?php
+	if(empty($zlmcategory)){
+		if($wlyimg) echo '<div class="banner2" style="margin-top: 56px;"><img src="'.$wlyimg.'" width="100%" height="" /></div>';
+		else echo '<div class="banner2" style="margin-top: 56px;"><img src="/images/banner7_s1.jpg" width="100%" height="" /></div>';
+	}
+?>
+<div class="yqkg-top">
+   <ul class="clearUl"><volist name="zlmcategory" id="vo">
+      <a href="/index.php?s=/addon/WeiSite/WeiSite/<?php 
+	  if($pidlm[$vo[pid]]) echo $pidlm[$vo[pid]];
+	  else echo 'Survey';
+	  ?>/cate_id/{$vo.id}.html"><li <?php
+	  if($cate_id==$vo['id']) echo 'class="current"';
+	  //$kkks++;
+	  //$kkscuo=count($zlmcategory);
+	  //if($kkks==$kkscuo) echo 'style="margin-left:0.24rem;margin-bottom:0.75rem;"';
+	  echo ' style="margin-right:0.24rem;margin-top:0.24rem; "';
+	  //if($kkks>1) echo ' style="margin-left:0.24rem; margin-top:0.24rem; "';
+	  //echo '"';
+	  ?>>{$vo.title}</li></a>
+      
+     </volist>
+   </ul>
+</div>

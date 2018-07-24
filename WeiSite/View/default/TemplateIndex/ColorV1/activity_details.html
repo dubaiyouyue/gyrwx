@@ -1,0 +1,27 @@
+<include file="Public/head_app"/> 
+<div class="dak" style=" padding-bottom:1rem;">
+  <div class="grzl"> <a onclick="javascript:history.back(-1);">
+  	<if condition="$get_lanmu_name">
+    	<div class="hyjg jfbg" style="margin-top: 55px;">{$get_lanmu_name}<if condition="$get_lanmu_name">-详情页</if></div>
+	</if>
+    </a> </div>
+</div>
+<div class="yhhd-xqy">
+  <div class="yhhd-xqy-top" style="font-size:16px;color:#FF4400">{$hd_details.title}</div>
+  <div class="yhhd-xqy-sj">发布时间：{$hd_details.cTime|time_format=###,'Y年m月d日'}</div>
+</div>
+<style type="text/css">
+	.yhhd-xqy-wenzi p img{width: 100%}
+</style>
+<div class="yhhd-xqy-wenzi">
+ {$hd_details.content}
+<!-- <div class="yhhd-xqy-pic1"><img src="{$hd_details.cover|get_cover_url}" width="100%" height="" /></div> -->
+
+
+
+<div class="previous">
+  <div class="previous-1">上一篇：<if condition="!empty($sxpian[0][title])"><a href="{:U('addon/WeiSite/WeiSite/Activity_details',array(cate_id=>$cate_id,post_id=>$sxpian[0][id]))}">{$sxpian[0][title]}</a><else/><span>没有了</span></if></div>
+  <div class="previous-2"> 下一篇：<if condition="!empty($sxpian[1][title])"><a href="{:U('addon/WeiSite/WeiSite/Activity_details',array(cate_id=>$cate_id,post_id=>$sxpian[1][id]))}">{$sxpian[1][title]}</a><else/><span>没有了</span></if></div>
+</div>
+</div>
+<include file="Public/footer_app"/>

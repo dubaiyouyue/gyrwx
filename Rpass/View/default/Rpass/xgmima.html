@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<title></title>
+<script src="/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.min.js"></script>
+<link rel="stylesheet" href="/css/animate.min.css">
+<!-- <script type="text/javascript" src="/js/tishicengjsqiu.js"></script> -->
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="/css/css.css" rel="stylesheet"/>
+<!-- <link rel="stylesheet" type="text/css" href="/js/src/mobile-select-area.css"> -->
+<!-- <script type="text/javascript" src="/js/src/dialog.js"></script> -->
+<!-- <script type="text/javascript" src="/js/src/mobile-select-area.js"></script> -->
+</head>
+<body>
+
+
+
+
+<!--头部  结束-->
+<div class="dak" style=" padding-bottom:20px;"></div>
+<style>
+.grzl .hyjf .Login1 ul li .Code-Pic-5.dzh{
+	height:145px; width:99%; padding-left: 10px;
+    padding-top: 10px; border: 1px solid #ccc;
+}
+.cuwudzwx{color:red;background-color:#f9e70b}
+</style>
+	<div class="Login1" >
+    	<ul>
+	       <li style="margin-bottom:0.5rem"><p class="Code-Pic-1"><input type="text" style="height: 2rem;" name="passold" id="passold" value="" placeholder="请输入旧密码" /></p></li>
+	       <li style="margin-bottom:0.5rem" ><p class="Code-Pic-2"><input  type="password" style="height: 2rem;" name="passnew" id='passnew' value="" placeholder="请输入新密码 *" /></p></li>
+	       <li style="margin-bottom:0.5rem"><p class="Code-Pic-2"><input  type="password" style="height: 2rem;" name="passnew2" id='passnew2' value="" placeholder="请再次输入新密码 *" /></p></li>
+           <!--  <li><p class="Code-Pic-1" style="width:100%;"><input type="button" id="tijiaodz" style="width:100%; background-color:#f66606; color:#e4e2e1; font-weight:bold;font-size:16px; " value="提 交" ></p></li> -->
+		</ul>
+ 	</div>
+   <div class="bc" onclick="xiugaimima()">提交</div>
+
+
+<script type="text/javascript" src="/js/layer/layer.js"></script>
+</body>
+</html>
+<script type="text/javascript">
+	function xiugaimima(){
+    var passold=$("#passold").val();
+    var passnew=$("#passnew").val();
+    var passnew2=$("#passnew2").val();
+    if(!passold || (passold.length<6)){
+        layer.msg('请输入旧密码');
+        return false;
+    }
+    if(!passnew || (passnew.length<6)){
+        layer.msg('请输入新密码');
+        return false;
+    }
+     if(!passnew2 || (passnew!=passnew2)){
+        layer.msg('密码不一致');
+        return false;
+    }
+
+
+      // wxdz=1;
+      //      	    layer.msg('添加成功');
+      //      	    setTimeout(function(){
+      //              	setTimeout(' parent.location.reload();',1000);
+      //           },3000)
+    $.ajax({
+        type: "POST",
+        url: "{:U('addon/Rpass/Rpass/edit_mima')}",
+        data: "passold=" + passold+"&passnew="+passnew+"&passnew2="+passnew2,
+        success: function(msg) {
+            if(msg['xg']==1){
+            	layer.msg('修改成功');
+                setTimeout(function(){
+                   setTimeout(' parent.location.reload();',1000);
+                 },3000)
+            }else if(msg['xg']==3){
+            	layer.msg('请输入正确的旧密码');
+             
+            }else if(msg['xg']==4){
+               layer.msg('您未登录请先登录');
+                setTimeout(function(){
+                   setTimeout(' parent.location.reload();',1000);
+                 },3000)
+            }else if(msg['xg']==5){
+            	 layer.msg('两次输入的新密码不一致');
+                setTimeout(function(){
+                   setTimeout(' parent.location.reload();',1000);
+                 },3000)
+            }else if(msg['xg']==7){
+                layer.msg('新旧密码一致无法修改');
+                setTimeout(function(){
+                   setTimeout(' parent.location.reload();',1000);
+                 },3000)
+            }else if(msg['xg']=2||!msg){
+            	layer.msg('修改失败');
+            }
+            
+        }
+    });  
+ 
+  }
+</script>

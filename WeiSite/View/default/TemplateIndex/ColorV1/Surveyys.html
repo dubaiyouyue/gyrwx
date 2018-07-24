@@ -1,0 +1,65 @@
+
+<div class="xmys clearUl" id="sfsdfsssshtml">
+<?php
+	$kccc=count($dynrlb);
+?>
+  <volist name="dynrlb" id="vo">
+  
+    <div class="xmys-pic1" style="margin-top:1rem;<?php
+	$kkk++;
+	if(!($kkk%2)) echo 'margin-left:4%;';
+	if($kkk==$kccc) echo '/*border-bottom:none;*/margin-bottom:1rem;';
+	if(!($kccc%2)){
+		if($kkk==($kccc-1)) echo '/*border-bottom:none;*/margin-bottom:1rem;';
+	}
+  ?>">
+      <a href="/index.php?s=/addon/WeiSite/WeiSite/yqymnry/cate_id/{$vo.cate_id}/id/{$vo.id}.html"><div class="xmys-tupian1"><img src="{$vo.cover|get_cover_url}" width="100%" height="" /></div></a>
+      <a href="/index.php?s=/addon/WeiSite/WeiSite/yqymnry/cate_id/{$vo.cate_id}/id/{$vo.id}.html"><div class="xmys-wenzi">{$vo.title}</div></a>
+      
+    </div>
+    
+  
+  </volist>
+	
+</div>
+<div id="sfsdfssss" onclick="sslyss();" style="
+    background: green;
+    color: #fff;
+    border-radius: 3px;
+    width: 100px;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 1rem;
+    padding: 6px 0px;
+">查看更多</div>
+<!---------- 项目优势 结束----------->
+
+
+<script>
+	nyyyyn=1;
+	//sslyss();
+	function sslyss(){
+	$("#sfsdfssss").text('加载中...');
+	$.ajax( {
+			url: '/index.php?s=/addon/WeiSite/WeiSite/hqgddd/cate_id/3/p/'+nyyyyn+'/th/Surveyajax.html', //这里是静态页的地址
+			type: "GET", //静态页用get方法，否则服务器会抛出405错误
+			success: function(data){
+				if(data=='no'){
+					$("#sfsdfssss").text('没有了');
+					return false;
+				}
+				//var result = $(data).find("另一个html页面的指定的一部分").html();
+				$("#sfsdfsssshtml").append(data);
+				$("#sfsdfssss").text('查看更多...');
+				nyyyyn=nyyyyn+1;
+			}
+	});
+	}
+</script>
+
+
+
+
+
+
+<div class="clearfix"></div>

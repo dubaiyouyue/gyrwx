@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<if condition="$config[title]">
+<title>{$site_title}-{$config.title}</title>
+<else/>
+<title>{$site_title}</title>
+</if>
+<script src="/js/jquery-1.11.0.min.js"></script>
+<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.min.js"></script> -->
+<link rel="stylesheet" href="/css/animate.min.css">
+<script type="text/javascript" src="/js/tishicengjsqiu.js"></script>
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="/css/css.css" rel="stylesheet"/>
+<script>
+//- 设置html标签font-size
+(function (doc, win) {
+    var _root = doc.documentElement,
+        resizeEvent = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        resizeCallback = function () {
+            var clientWidth = _root.clientWidth,
+                fontSize = 20;
+            if (!clientWidth) return;
+            //if(clientWidth < 640) {
+                fontSize = 20 * (clientWidth / 320);
+            /*} else {
+                fontSize = 20 * (640 / 320);
+            }*/
+            _root.style.fontSize = fontSize + 'px';
+        };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvent, resizeCallback, false);
+    doc.addEventListener('DOMContentLoaded', resizeCallback, false);
+})(document, window);
+</script>
+</head>
+<body <if condition="$bodycss">style="{$bodycss}"<else />style=""</if>>
+<!--头部 开始-->
+<div class="toubuone" id="toubuxx">
+  <div class="top">
+    <div class="top-fl" style="margin-left: 0.5rem; margin-top: 18px;" id="more_nav"><img src="/images/top-2.png" width="100%" height="" /></div>
+  </div>
+  <a href="/index.php?s=/addon/WeiSite/WeiSite/index.html"><div class="top-logo"><img  class="toubuonelogo"  src="{$config.cover|get_cover_url}" /></div>
+  <div class="top-2">
+    <div class="top-2-1" style="margin-right: 0.5rem; margin-top:18px;"><a <if condition="$_COOKIE[user]">href="/index.php?s=/addon/WeiSite/WeiSite/Meber_service/cate_id/38.html" <else />href="/index.php?s=/addon/Login/Login/index.html" </if>><img src="images/top-1.png" width="100%" height="" /></a></div>
+  </div>
+  <!--头部  结束--> 
+</div>
+
+<div class="spfl" id='content_nav' style='display:none; z-index:999;max-height:25rem;overflow-y: auto; '>
+  <div class="spfl-top"></div>
+
+<volist name='goods_nav' id='vo'>
+<div class="spfl-1 clearUl">
+    <div class="spfl-1-left"><img src="{$vo.icon|get_cover_url}"  /></div>
+    <!-- href="{:U('addon/WeiSite/WeiSite/Goods_list',array(id=>$vo[id]))}"  -->
+    <a class="clearUl"  onclick="thisdown({$vo.id})"><div class="spfl-1-right">{$vo.title}</div></a>
+    <volist name="vo[subclass]" id='vs'>
+      <if condition="($vs['pid'] eq $vo['id'])">
+     <div class="spfl-zk downid_{$vo.id}" style="display:none">
+        <div class="spfl-zk1"><img src="{$vs.icon|get_cover_url}"  /></div>
+        <a href="{:U('addon/WeiSite/WeiSite/Goods_list',array(id=>$vs[id]))}" class="clearUl"><div class="spfl-zk2">{$vs.title}</div></a>
+      </div>
+    </if>
+    </volist>
+     <input type="hidden" id="getdowm" value="">
+  </div>
+</volist>
+
+<div id="cccccloseee" >x</div>
+</div>
+
+<!-- 遮罩层 关闭左边栏菜单 //2016.11.25-->
+<style>
+#cccccloseee{    display:none;position: fixed;
+    top: 20px;
+    left: 60%;
+    padding: 8px 12px;
+    background: #fff;
+    border-radius: 9px;
+    margin-left: -7px;
+    color: green;}
+#content_navssss{display:none;width: 100%;
+    height: 100%;
+    background: rgba(51, 51, 51, 0.69);
+    position: fixed;
+    left: 0;
+    top: 0px;
+    z-index: 99;}
+</style>
+<div id="content_navssss"></div>
+<!--end-->
+
+<script>
+  $('#content_navssss').click(function(){
+   if($('#content_nav').css("display")=="none"){  
+          $('#content_nav').show();
+      $('#content_navssss').show();
+      $('#cccccloseee').show();
+      }else{
+      $('#content_navssss').hide();
+          $('#content_nav').hide(); 
+      $('#cccccloseee').hide();     
+        }  
+  });
+  $('#more_nav').click(function(){
+   if($('#content_nav').css("display")=="none"){  
+      $('#content_nav').show();
+      $('#content_navssss').show();
+      $('#cccccloseee').show();
+      }else{
+      $('#content_navssss').hide();
+      $('#content_nav').hide(); 
+      $('#cccccloseee').hide();        
+        }  
+  });
+  $('#cccccloseee').click(function(){
+   if($('#content_nav').css("display")=="none"){  
+           $('#content_nav').show();
+      $('#content_navssss').show();
+      $('#cccccloseee').show();
+      }else{
+      $('#content_navssss').hide();
+          $('#content_nav').hide(); 
+      $('#cccccloseee').hide();        
+        }  
+  });
+</script>
+<script type="text/javascript">
+
+  function thisdown(objs){
+       if($(".downid_"+objs).css("display")=="none"){  
+          $(".downid_"+objs).slideDown();
+       }else{
+          $(".downid_"+objs).slideUp();
+       }
+  }
+
+</script>
+
+<div class="dak-1" style="margin-top:55px">
+  <div id="shouchuo" class="nvz">
+   <div class="nvz-sho chaju">
+     <div class="sho-left" ><p><input name='wxtitle' id='wxtitle' style="height: 1.4rem; line-height: 1.4rem; width:100%;outline:medium; background-color: #f9f9f9; color:#858282" type="text" placeholder="搜索品牌、商品"></p></div>
+     <div class="sho-right"><p><a onclick="wxsearch()">搜索</a></p>
+     </div>
+
+<style type="text/css">
+  .shangzui-pic3-7 {
+    width: 0.5rem;
+    height: 0.25rem;
+    display: block;
+    float: right;
+    background: url(/images/shang3.png) no-repeat;
+    margin-top: 0.5rem;
+  }
+ .adadf{margin-top: -68px}
+ .chaju{margin-top:7px}
+ .chabie{margin-top:8px}
+}
+</style>
+      </div>
+   </div>
+        <div class="zui" id="paixufs">
+          <div class="zui-1">
+            <div class="zui-picl">
+            <a href="{:U('addon/WeiSite/WeiSite/Goods_list',array('wdhot'=>$catetype,'order'=>zx,'dxps'=>$dxps))}"><div class="zui-pic3-2 <if condition='$dxps eq desc and $get_order eq zx'>shangzui-pic3-7</if>"></div></a>
+            <div class="zui-pic1-2"><p><a href="{:U('addon/WeiSite/WeiSite/Goods_list',array('wdhot'=>$catetype,'order'=>zx,'dxps'=>$dxps))}">最新</a></p></div>
+            </div>
+          </div>
+          <div class="zui-3">
+            <div class="zui-pic3">
+            <a href="{:U('addon/WeiSite/WeiSite/Goods_list',array('wdhot'=>$catetype,'order'=>jg,'dxps'=>$dxps))}"><div class="zui-pic3-2 <if condition='$dxps eq desc and $get_order eq jg'>shangzui-pic3-7</if>"></div></a>
+            <div class="zui-pic3-3"><p><a href="{:U('addon/WeiSite/WeiSite/Goods_list',array('wdhot'=>$catetype,'order'=>jg,'dxps'=>$dxps))}">价格</a></p></div>
+            </div>
+          </div>
+          
+          
+          <div class="zui-3">
+            <div class="zui-pic3">
+            <a href="{:U('addon/WeiSite/WeiSite/Goods_list',array('wdhot'=>$catetype,'order'=>xl,'dxps'=>$dxps))}"><div class="zui-pic3-2 <if condition='$dxps eq desc and $get_order eq xl'>shangzui-pic3-7</if>"></div></a>
+            <div class="zui-pic3-3"><p><a href="{:U('addon/WeiSite/WeiSite/Goods_list',array('wdhot'=>$catetype,'order'=>xl,'dxps'=>$dxps))}">销量</a></p></div>
+            </div>
+          </div>
+          
+          
+        </div>
+</div>
+ <div id='goods_more' class="nov clearUl" style="margin-top:7rem;background:#fff;" >
+  <volist key="kkn" name='goods' id='r'>
+    <a href="{:U('addon/WeiSite/WeiSite/Goods_detail',array(id=>$r[id]))}" class="clearUl" style="<?php if(($kkn%2)) echo 'margin-right: 5%;'; if($kkn>2) echo 'margin-top: 0.5rem;'; ?>width: 47.5%;float: left;">
+    <div class="nov-left" style="width:100%;background: #fff;">
+      <div class="nov-pic1"><img src="{$r.cover|get_cover_url}" style="width:100%;" /></div>  
+     <div class="nov-wenzi">{$r.title}</div>
+     <div class="nov-jq"><strong>￥{$r.price}</strong></div>
+    </div></a>
+  </volist>
+  </div>
+  <input type="hidden" id="pyh" value="1">
+  <input type="hidden" id="catetype" value="{$catetype}">
+  <input type="hidden" id="typeorder" value="{$get_order}">
+  <input type="hidden" id="typefs" value="{$get_dxps}">
+  <if condition="$goods">
+    <a onclick="get_more_goods(this)"><div id='more_ts' class="nov-10">点击加载更多</div></a>
+  </if>
+<include file="Public/footer_app"/>
+<script type="text/javascript">
+  var k = 1;
+  function  get_more_goods(_obj){
+     if(k==2){ return false;}
+      $('#more_ts').html('正在加载 ...');
+      k=2;
+      var pyh = $("#pyh").val(); 
+      var typeorder=$("#typeorder").val();
+      var typefs=$("#typefs").val();
+      var catetype=$("#catetype").val();
+        $.ajax({
+            type: "POST",
+            url: "{:U('addon/WeiSite/WeiSite/ajax_goods_list')}",
+            data: "pyh=" + pyh+"&order="+typeorder+"&dxps="+typefs+"&catetype="+catetype,
+            success: function(msg) {
+              if (msg['len']==1) {
+                var str='';
+                var css1='';
+                var css2='';
+                $.each(msg.lists, function(i, valus) {
+                    var m=i+1;
+                    if(m%2){css1='margin-right: 5%;';}else{css1='';}
+                    if(m>2){css2='margin-top: 0.5rem;';}else{css2='';}
+                    str+='<a href="'+valus.urls+'" class="clearUl" style="'+css1+' '+css2+' width: 47.5%;float: left;">';
+                    str+='<div class="nov-left" style="width:100%;background: #fff;">';
+                    str+='<div class="nov-pic1"><img src="'+valus.thumb+'" style="width:100%;overflow: hidden;" /></div>';
+                    str+='<div class="nov-wenzi">'+valus.title+'</div>';
+                    str+='<div class="nov-jq"><strong>￥'+valus.price+'</strong></div>';
+                    str+='</div></a>';
+                });
+                    k=1;
+                    $('#more_ts').html('点击加载更多');
+                    $("#pyh").val(msg['pyh']);
+                    $("#goods_more").append(str);
+
+              }else{
+
+                  $('#more_ts').html('已全部加载');  
+              }
+            }
+
+        });
+  }   
+
+  function wxsearch(){
+    var wds=$('#wxtitle').val();
+    if(wds.length<0||!wds){
+      tishicengjsqiuonclick('请输入搜索内容','wxtitle'); return false;
+    }
+   
+    window.location.href="/index.php?s=/addon/WeiSite/WeiSite/Searchs/wds/"+wds+'.html'; //  /index.php?s=/addon/Rpass/Rpass/zhanghao/zhanghao/'+tels+'.html'
+   
+  }
+ 
+$(function(){  
+     var wh=$(window).height();
+        $(window).scroll(function(){
+        var s=wh-$(window).scrollTop();
+       
+        if($(window).scrollTop()>300){
+          $('#paixufs').hide();
+          $('#toubuxx').hide();
+          $('#shouchuo').addClass('adadf');
+          $('.nvz-sho').addClass('chabie');
+          $('.nvz-sho').removeClass('chaju');
+
+        }else{
+          $('#paixufs').show();
+          $('#toubuxx').show();
+          $('#shouchuo').removeClass('adadf');
+          $('.nvz-sho').addClass('chaju');
+          $('.nvz-sho').removeClass('chabie');
+        }
+      });
+});  
+</script>

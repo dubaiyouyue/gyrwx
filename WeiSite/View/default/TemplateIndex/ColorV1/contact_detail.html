@@ -1,0 +1,52 @@
+<include file="Public/head_app"/>  
+<!----------------------banner 开始-------------->
+
+<div class="banner2" style="width:100%; margin-top:2.1rem;"><img src="images/2/1_r1_c1_s1.jpg" width="100%" /></div>
+<!----------------------banner 开始-------------->
+<div class="ppjs">
+<div class="ppjs-1">
+  <style type="text/css">
+  .pppjs-to4l{    width: 32.2%;
+    height: 1.75rem;
+    background-color: #ff5d00;
+    text-align: center;
+    line-height: 1.75rem;
+    font-size: 16px;
+    color: #FFF;
+    float: left;
+    margin:0rem 0.24rem 0rem 0rem;
+  }
+  .ppjs-top66l{width: 32.2%;
+    height: 1.75rem;
+    background-color:#a4a4a4;
+    text-align: center;
+    line-height: 1.75rem;
+    font-size: 16px;
+    color: #FFF;
+    float: left;
+    margin:0rem 0.24rem 0rem 0rem;}
+    .xqy-1 p img{width:100%}
+</style>
+
+      <div class="ppjs-top">
+<volist  name='dynr' id='vo'>
+         <a href="{:U('addon/WeiSite/WeiSite/Contact',array(cate_id=>$cate_id,post_id=>$vo[id]))}"><div class="<if condition='$getid eq $vo[id]'>pppjs-to4l<else/>ppjs-top66l</if>">{$vo.title}</div></a>
+        </volist> 
+      </div>
+          <div class="xinwem-xqy">
+            <p style="color: #fe5200;font-size: 15px;">{$posts.title}</p>
+            <p style="color:#666;border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #CCC; ">{$posts.cTime|time_format=###,'Y-m-d'}</p>
+          </div>
+          <style type="text/css">
+              .xqy-1 p{    text-indent: 0;}
+          </style>
+         <div class="xqy-1">{$posts.content}</div>
+    <!-- <div class="xqy-pic1" style="background:url({$posts.cover|get_cover_url}) no-repeat;" ></div> -->
+<div class="previous">
+  <div class="previous-1">上一篇：<if condition="!empty($sxp[0][title])"><a href="{:U('addon/WeiSite/WeiSite/Contact_detail',array(cate_id=>$cate_id,post_id=>$getid,post=>$sxp[0][id]))}">{$sxp[0][title]}</a><else/><span>没有了</span></if></div>
+  <div class="previous-2" style="margin-bottom: 0rem;"> 下一篇：<if condition="!empty($sxp[1][title])"><a href="{:U('addon/WeiSite/WeiSite/Contact_detail',array(cate_id=>$cate_id,post_id=>$getid,post=>$sxp[1][id]))}">{$sxp[1][title]}</a><else/><span>没有了</span></if></div>
+</div>
+</div>
+<div class="clearfix"></div>
+</div>
+<include file="Public/footer_app"/>  

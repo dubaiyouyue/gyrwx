@@ -1,0 +1,37 @@
+<style>
+.xqy-wenzi img{max-width:100%;}
+</style>
+
+
+<div class="news-xqy">
+   <div class="news-xqy-bt">{$dynrid.title}</div>
+   <div class="news-xqy-rq">{$dynrid.cTime|time_format=###,'Y-m-d'}</div>
+ </div>
+<div class="xqy-wenzi" style="
+    margin-bottom: 1rem;
+">
+ {$dynrid.content}
+</div>
+<div class="previous" style="
+    margin-bottom: 1rem;
+">
+<?php
+	if($sxp['0']['id']) echo '<div class="previous-1">上一篇：<a href="/index.php?s=/addon/WeiSite/WeiSite/yqymnry/cate_id/'.$sxp['0']['cate_id'].'/id/'.$sxp['0']['id'].'.html">'.$sxp['0']['title'].'</a></div>';
+	else echo '<div class="previous-1">上一篇：没有了</div>';
+	
+	if($sxp['1']['id']) echo '<div class="previous-2"> 下一篇：<a href="/index.php?s=/addon/WeiSite/WeiSite/yqymnry/cate_id/'.$sxp['1']['cate_id'].'/id/'.$sxp['1']['id'].'.html">'.$sxp['1']['title'].'</a></div>';
+	else echo '<div class="previous-2"> 下一篇：没有了</a></div>';
+?>
+  
+  
+</div>
+
+
+
+
+
+
+
+
+
+<div class="clearfix"></div>

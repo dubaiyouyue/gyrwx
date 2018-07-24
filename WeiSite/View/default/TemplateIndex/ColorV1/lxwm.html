@@ -1,0 +1,23 @@
+<script type="text/javascript" src="http://api.map.baidu.com/api?type=quick&ak=X8u8xx9GzO88EIydfLbTsvbK&v=1.0"></script>
+<div class="Contact us">
+  <div class="The">电话： <strong style=" font-size:16px; color:#F00;">{$peizhihq.dianhua}</strong></div>
+   <div class="Contact">联系人：{$peizhihq.lianxir}</div>
+    <div class="email" style="display:none;">电子邮箱：{$peizhihq.yx}</div>
+     <div class="address">地址：{$peizhihq.dz}</div>
+</div>
+
+<div class="map" id="map"></div>
+
+
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("map");
+	map.centerAndZoom(new BMap.Point({$peizhihq.dtl},{$peizhihq.dta}), 14);
+
+	map.addControl(new BMap.ZoomControl());  //添加地图缩放控件
+	var marker1 = new BMap.Marker(new BMap.Point({$peizhihq.dtl},{$peizhihq.dta}));  //创建标注
+	map.addOverlay(marker1);                 // 将标注添加到地图中
+	//创建信息窗口
+	var infoWindow1 = new BMap.InfoWindow("广西天材医疗器械有限公司<br>南宁市金凯路11号荣港城二期12座16楼E号");
+	marker1.addEventListener("click", function(){this.openInfoWindow(infoWindow1);});
+	</script>

@@ -1,0 +1,124 @@
+<include file="Public/head_app"/>  
+<!----------------------banner 开始-------------->
+<div class="banner2" style="width:100%; margin-top:2.1rem;">
+  <if condition="$iconimg">
+    <img src="{$iconimg|get_cover_url}" width="100%" />
+  </if>
+</div>
+<style type="text/css">
+  .pppjs-to4l{    width: 32.2%;
+    height: 1.75rem;
+    background-color: #ff5d00;
+    text-align: center;
+    line-height: 1.75rem;
+    font-size: 16px;
+    color: #FFF;
+    float: left;
+    margin:0rem 0.24rem 0rem 0rem;
+  }
+  .ppjs-top66l{width: 32.2%;
+    height: 1.75rem;
+    background-color: #a4a4a4;
+    text-align: center;
+    line-height: 1.75rem;
+    font-size: 16px;
+    color: #FFF;
+    float: left;
+    margin:0rem 0.24rem 0rem 0rem;}
+</style>
+
+<!----------------------banner 开始-------------->
+<div class="ppjs">
+<div class="ppjs-1"  id="mores">
+      <div class="ppjs-top">
+        <volist  name='dynr' id='vo'>
+         <a href="{:U('addon/WeiSite/WeiSite/Contact',array(cate_id=>$cate_id,post_id=>$vo[id]))}"><div class="<if condition='$getid eq $vo[id]'>pppjs-to4l<else/>ppjs-top66l</if>" style="color: #FFF">{$vo.title}</div></a>
+        </volist> 
+      </div>
+      <volist name='posts' id='vo'>
+         <if condition="$i%3 neq 0">
+         <div class="xinwen clearfix">
+           <a href="{:U('addon/WeiSite/WeiSite/Contact_detail',array(cate_id=>$cate_id,post_id=>$getid,post=>$vo[id]))}"><div class="xinwen-1">
+             <div class="xinwen-left"><img src="{$vo.cover|get_cover_url}" width="100%" height="" /></div>
+             <div class="xinwen-right">
+                <div class="xinwen-bt"><strong>{$vo.title}</strong></div>
+                <p style="font-size:12px; color:#D7D7D7; margin-top:0.5rem;">{$vo.cTime|time_format=###,'Y-m-d'}</p>
+                <div class="xinwen-nr" style="font-size:14px;line-height:25px;-webkit-line-clamp:2">
+                  {$vo.intro|msubstr=0,24}
+                </div>
+             </div>
+           </div></a>
+         </div>
+        <else />
+           <a href="{:U('addon/WeiSite/WeiSite/Contact_detail',array(cate_id=>$cate_id,post_id=>$getid,post=>$vo[id]))}"><div class="xinwen-3">
+             <div class="xinwen-3-nr">
+                <div class="xinwen-3-nr-bt"><strong>{$vo.title}</strong></div>
+                <p style="font-size:12px; color:#D7D7D7; margin-top:0.5rem;">{$vo.cTime|time_format=###,'Y-m-d'}</p>
+                <div class="xinwen-3-nr-1" style="font-size:14px;line-height:25px;-webkit-line-clamp:2">{$vo.intro|msubstr=0,24}</div>
+             </div>
+            </div></a>
+         </if>
+      </volist>     
+  
+  <input type="hidden" id="zixu_max_id" value="{$get_max_id}">
+  <input type="hidden" id="cate_id" value="{$cate_id}">
+  <input type="hidden" id="post_id" value="{$getid}">
+  <a onclick="get_more_contact(this)" ><div style="margin:0.5rem 0rem 0rem 0rem;" id="xinwen-gds" class="xinwen-gd">查看更多 >></div></a>  
+  </div>
+</div>
+<include file="Public/footer_app"/> 
+<script type="text/javascript">
+var k = 1;
+ function  get_more_contact(_obj){
+
+      if(k==2){ return false;}
+      $('#xinwen-gds').html('正在加载');
+      k=2;
+      var max_id = $("#zixu_max_id").val();
+      var cate_id = $("#cate_id").val();
+      var post_id = $("#post_id").val(); 
+        $.ajax({
+            type: "POST",
+            url: "{:U('addon/WeiSite/WeiSite/get_zx_more')}",
+            data: "zx_id=" + max_id+"&cate_id="+cate_id+"&post_id="+post_id,
+            success: function(msg) {
+               if (msg['len']==1) {
+                    var str = "";
+                    $.each(msg.lists, function(i, valus) {
+                         var s=i+1;
+                         var  m=s%3;
+                        if(m == 0){
+                           k=1;
+                           str+='<div class="xinwen clearfix">';
+                           str+='<a href="'+valus.urls+'"><div class="xinwen-1">';
+                           str+='<div class="xinwen-left"><img src="'+valus.cover+'" width="100%" height="" /></div>';
+                           str+='<div class="xinwen-right">';
+                           str+='<div class="xinwen-bt"><strong>'+valus.title+'</strong></div>';
+                           str+='<p style="font-size:12px; color:#D7D7D7; margin-top:0.5rem;">'+valus.cTime+'</p>';
+                           str+='<div class="xinwen-nr" style="font-size:14px;line-height:25px;-webkit-line-clamp:2" >'+valus.intro+'</div>';
+                           str+='</div>';
+                           str+='</div></a>';
+                           str+='</div>';
+                        }else{
+                           k=1;
+                          str+='<a href="'+valus.urls+'"><div class="xinwen-3">';
+                          str+='<div class="xinwen-3-nr">';
+                          str+='<div class="xinwen-3-nr-bt"><strong>'+valus.title+'</strong></div>';
+                          str+='<p style="font-size:12px; color:#D7D7D7; margin-top:0.5rem;">'+valus.cTime+'</p>';
+                          str+='<div class="xinwen-3-nr-1" style="font-size:14px;line-height:25px;-webkit-line-clamp:2">'+valus.intro+'</div>';
+                          str+='</div>';
+                          str+='</div></a>';
+                        }
+                    });
+                    k=1;
+                    $("#mores").append(str);
+                    $("#zixu_max_id").val(msg['max_zx_id']);
+                    $('#xinwen-gds').html('查看更多 >>');
+                }else{
+                  k=2;
+                  $('#xinwen-gds').html('已全部加载完');
+                }
+            }
+        });
+  }                      
+</script>

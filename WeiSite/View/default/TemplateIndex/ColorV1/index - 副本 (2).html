@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="textml;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+
+
+<title>{$site_title}-{$config.title}</title>
+
+<!---------- css 开始----------->
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/css.css" rel="stylesheet" type="text/css" />
+<!---------- css 结束----------->
+
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.min.js"></script>
+<script>
+//- 设置html标签font-size
+(function (doc, win) {
+    var _root = doc.documentElement,
+        resizeEvent = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        resizeCallback = function () {
+            var clientWidth = _root.clientWidth,
+                fontSize = 20;
+            if (!clientWidth) return;
+            //if(clientWidth < 640) {
+                fontSize = 20 * (clientWidth / 320);
+            /*} else {
+                fontSize = 20 * (640 / 320);
+            }*/
+            _root.style.fontSize = fontSize + 'px';
+        };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvent, resizeCallback, false);
+    doc.addEventListener('DOMContentLoaded', resizeCallback, false);
+})(document, window);
+</script>
+
+
+<style>
+
+
+
+</style>
+
+</head>
+
+<body style="background-color:#F0F0F0;">
+
+<!---------- 头部 开始----------->
+
+
+<div class="top">
+  <div class="top-left">
+    <div class="menu" style=" margin-top:0.75rem; margin-left:0.5rem;"><a href="javascript:;" id="open"><img src="images/dh-top.png" /></a></div>
+    
+    
+    <div class="ppptcdiv">
+	<ul>
+		<li><a href="/index.php?s=/addon/WeiSite/WeiSite/index.html" class="parent-element-1">首页</a></li>
+		<li><a href="/index.php?s=/addon/WeiSite/WeiSite/Survey/cate_id/2.html" class="parent-element-3">园区概况</a></li>
+		<li><a href="/index.php?s=/addon/WeiSite/WeiSite/dynamic/cate_id/8.html" class="parent-element-5">园区动态</a></li>
+		<li><a href="/index.php?s=/addon/WeiSite/WeiSite/investment/cate_id/13.html" class="parent-element-7">招商营销</a></li> 
+		<li><a href="/index.php?s=/addon/WeiSite/WeiSite/service/cate_id/19.html" class="parent-element-9">服务中心</a></li>
+		<li><a href="/index.php?s=/addon/WeiSite/WeiSite/grzx.html" class="parent-element-11">会员中心</a></li>
+        <li><a href="/index.php?s=/addon/WeiSite/WeiSite/lxwm.html" class="parent-element-14">联系我们 </a></li>
+        <li><a href="/index.php?s=/addon/WeiSite/WeiSite/wly.html" class="parent-element-15">微留言</a></li>
+       
+	</ul>
+	<span class="parent-element-x" id="colsoe" onclick="cloos();"></span>
+</div>
+<div id="ppptcdiv-ddd" onclick="cloos();"></div>
+<!--js-->
+<script>
+$(document).ready(function() {
+	
+    $('#open').click(function() {
+        $('.ppptcdiv').animate({left:'0px'},800);
+		$('#ppptcdiv-ddd').css('display','block');
+    });
+});
+function cloos(){
+	$('.ppptcdiv').animate({left:'-225px'},800);
+	$('#ppptcdiv-ddd').css('display','none');
+}
+</script>
+
+    
+  </div>
+  
+  
+  
+  
+  <div class="top-middle">
+    <a href="/index.php?s=/addon/WeiSite/WeiSite/index.html"><div class="top-logo"><img src="images/dh-logo1.png" /></div></a>
+  </div>
+  <div class="top-right">
+    <a href="/index.php?s=/addon/WeiSite/WeiSite/grzx.html"><div class="top-dr"><img src="images/dh-dr.png" width="21" height="23" /></div></a>
+  </div>
+</div>
+<!---------- 头部 结束----------->
+<div class="banner1">
+
+<!---------------------------------- container开始 ---------------------------------->
+<!--幻灯片-->
+    <script type="text/javascript" src="js/prefixfree.min.js"></script>
+    <script type="text/javascript" src="js/flipsnap.min.js"></script>
+	<script>
+	var ww=$(window).width();
+	//banner
+	var w=428;
+	var h=280;
+	var b=1;
+	var newsssheigtg=(ww*b*h)/w;
+new_widht_baifenbi_kuandu=1;
+var xiaoxunews=ww-(182/360)*ww;
+document.write("<style>.index-h-l-wenzi{width:"+xiaoxunews+"px;top: 50%;margin-top: -28px;}</style>");
+
+</script>
+    <script type="text/javascript" src="js/mobile_module.js"></script>
+    <script type="text/javascript" src="js/admin_common.js"></script>
+<div class="container" style="padding-top:55px;">
+            <section class="banner">
+                <ul>
+
+<?php
+foreach($slideshow as $k=>$v){
+	echo '<li><a href="'.$v['url'].'"><img src="'.$v['img'].'"></a></li>';
+}
+?>
+
+						</ul>
+        <span class="identify">
+		        
+       <?php
+foreach($slideshow as $k=>$v){
+	if(!$k) echo '<em class="cur"></em>';
+	else echo '<em></em>';
+}
+?>
+		</span>
+            </section></div><script type="text/javascript">
+    $(function(){
+        $.WeiPHP.initBanner(true,5000);
+        $.WeiPHP.setRandomColor('.random_color');
+    })
+</script>
+<!--幻灯片-->
+<!---------------------------------- container结束 ---------------------------------->
+
+<!--园区介绍 开始-->
+</div>
+
+<div class="nov">
+  <div class="niv-top">
+    <div class="niv-wenzi">园区介绍<span style="font-size:16px; color:#5DA533;">/ introduce</span></div>
+    <div class="nov-more"><a href="/index.php?s=/addon/WeiSite/WeiSite/Survey/cate_id/2.html">MORE+</a></div>
+	
+  </div>
+  
+  <a href="/index.php?s=/addon/WeiSite/WeiSite/Survey/cate_id/2.html"><div class="yqjs" style="
+    height: 3.3rem;
+">
+	{$yqjssss.intro}
+  </div></a><div class="pic1"><img src="{$yqjssss.cover|get_cover_url}" width="100%" height="" /></div>
+  
+  
+</div>
+
+<!--园区介绍 结束-->
+
+<!--园区优势 开始-->
+<div class="nov-1">
+  <div class="niv-top">
+    <div class="niv-wenzi">园区优势<span style="font-size:16px; color:#5DA533;">/ advantage</span></div>
+    <div class="nov-more"><a href="/index.php?s=/addon/WeiSite/WeiSite/Survey/cate_id/3.html">MORE+</a></div>
+  </div>
+<volist name="yyssdynrlb" id="vo">
+<?php
+$kksdfsk++;
+if(($kksdfsk%2)){
+?>
+<a href="/index.php?s=/addon/WeiSite/WeiSite/yqymnry/cate_id/{$vo.cate_id}/id/{$vo.id}.html"><div class="advantage">
+  <div class="advantage1">
+   
+  <img src="{$vo.cover|get_cover_url}" width="100%" height="" />
+  <div class="advantage1-1">
+    <div class="advantage1-wenzi">
+      <div class="advantage1-wenzi-1">{$vo.intro}</div>
+<div class="advantage1-wenzi-2"></div>
+<div class="advantage1-wenzi-3">{$vo.title}</div>
+    </div>
+  </div>
+  </div>
+</div></a>
+<?php
+}else{
+?>
+
+
+<a href="/index.php?s=/addon/WeiSite/WeiSite/yqymnry/cate_id/{$vo.cate_id}/id/{$vo.id}.html"><div class="advantage2">
+  <div class="advantage3">
+   
+  <img src="{$vo.cover|get_cover_url}" width="100%" height="" />
+  <div class="advantage2-1">
+    <div class="advantage2-wenzi">
+      <div class="advantage2-wenzi-1">{$vo.intro}</div>
+<div class="advantage1-wenzi-4"></div>
+<div class="advantage1-wenzi-5">{$vo.title}</div>
+    </div>
+  </div>
+  </div>
+</div></a>
+
+<?php }?>
+</volist>
+
+
+</div>
+
+<!--园区优势 结束-->
+
+
+<!--园区新闻 开始-->
+
+<div class="nov-2">
+  <div class="niv-top">
+    <div class="niv-wenzi">园区新闻<span style="font-size:16px; color:#5DA533;">/ news</span></div>
+    <div class="nov-more"><a href="/index.php?s=/addon/WeiSite/WeiSite/dynamic/cate_id/8.html">MORE+</a></div>
+  </div>
+  <volist name="yqxxssnrlb" id="vo"> 
+<a href="/index.php?s=/addon/WeiSite/WeiSite/yqymnry/cate_id/{$vo.cate_id}/id/{$vo.id}.html"><div class="news clearfix">
+  <div class="news-1"><img src="{$vo.cover|get_cover_url}" width="100%" height="" /></div>
+  <div class="news-2">
+    <div class="news-xinwen">{$vo.title}</div>
+    <div class="news-xinwen1">{$vo.intro}</div>
+  </div>
+</div></a></volist>
+
+ 
+  
+</div>
+
+<!--园区新闻 结束-->
+
+
+
+
+<div class="clearfix"></div>
+<!---------- foom 尾巴 开始----------->
+<div class="foom ">
+  <div class="foom1"></div>
+  <div class="foom2">
+    <div class="foom-wenzi">Copyright © {$config.title}   版权所有</div>
+     <div class="foom-wenzi1">技术支持：<a href="http://www.resonance.com.cn/" target="_blank">广西共振广告</a></div>
+  </div>
+</div>
+<!---------- foom 尾巴 结束----------->
+
+</body>
+</html>

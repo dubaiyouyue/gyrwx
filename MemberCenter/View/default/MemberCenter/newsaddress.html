@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<title></title>
+<script src="/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.min.js"></script>
+<link rel="stylesheet" href="/css/animate.min.css">
+<script type="text/javascript" src="/js/tishicengjsqiu.js"></script>
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="/css/css.css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="/js/src/mobile-select-area.css">
+<script type="text/javascript" src="/js/src/dialog.js"></script>
+<script type="text/javascript" src="/js/src/mobile-select-area.js"></script>
+<script>
+//- 设置html标签font-size
+(function (doc, win) {
+    var _root = doc.documentElement,
+        resizeEvent = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        resizeCallback = function () {
+            var clientWidth = _root.clientWidth,
+                fontSize = 20;
+            if (!clientWidth) return;
+            //if(clientWidth < 640) {
+                fontSize = 20 * (clientWidth / 320);
+            /*} else {
+                fontSize = 20 * (640 / 320);
+            }*/
+            _root.style.fontSize = fontSize + 'px';
+        };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvent, resizeCallback, false);
+    doc.addEventListener('DOMContentLoaded', resizeCallback, false);
+})(document, window);
+</script>
+</head>
+<body <if condition="$bodycss">style="{$bodycss}"<else />style=""</if>>
+
+
+
+
+<!--头部  结束-->
+<div class="dak" style=" padding-bottom:20px;"></div>
+<style>
+.grzl .hyjf .Login1 ul li .Code-Pic-5.dzh{
+	height:145px; width:99%; padding-left: 10px;
+    padding-top: 10px; border: 1px solid #ccc;
+}
+.cuwudzwx{color:red;background-color:#f9e70b}
+</style>
+	<div class="Login1">
+    	<ul>
+	        <li><p class="Code-Pic-1"><input type="text" name="uname" id="uname" value="{$newdzxgxx.xm}" placeholder="收货人 *" /></p></li>
+	        <li><p class="Code-Pic-2"><input type="text" name="tel" id='tel' value="{$newdzxgxx.tel}" placeholder="联系电话 *" /></p></li>
+	        <li><p class="Code-Pic-2"><input type="text" name="youbian" id='youbian' value="{$newdzxgxx.yb}" placeholder="邮编 *" /></p></li> 
+            <li><p class="Code-Pic-3"><input type="text" name="szdq" id='szdq' value="{$newdzxgxx.sf} {$newdzxgxx.shi} {$newdzxgxx.qy}" placeholder="所在地区" /></p></li>
+            <li><p class="Code-Pic-5"><textarea class="dzh" style="width:100%; height:140px; border:1px solid #ccc;" name="xiangxidz" id="xiangxidz" value="{$newdzxgxx.xx}" placeholder="请填写详细地址 *">{$newdzxgxx.xx}</textarea></p></li>
+           <!--  <li><p class="Code-Pic-1" style="width:100%;"><input type="button" id="tijiaodz" style="width:100%; background-color:#f66606; color:#e4e2e1; font-weight:bold;font-size:16px; " value="提 交" ></p></li> -->
+		</ul>
+ 	</div>
+   <div class="bc" <if condition="$newdzxgxx"> onclick="xgdiswx({$newdzxgxx.id});" <else/>onclick="addxindzwx();" </if>>提交</div>
+
+<script>
+	var selectArea2 = new MobileSelectArea();
+	selectArea2.init({trigger:'#szdq',value:$('#szdq').val(),data:'js/src/data.json'});
+</script>
+<script type="text/javascript" src="/js/layer/layer.js"></script>
+</body>
+</html>
+<script type="text/javascript">
+var wxdz=1;
+	function addxindzwx(){
+		if(wxdz==2){ return false;}
+		wxdz=2;
+		var tel=$('#tel').val();          //电话
+		var uname=$('#uname').val();      //收货人
+		var youbian=$('#youbian').val();  //邮编
+		var szdq=$('#szdq').val();        //所在地址
+		
+		var xiangxidz=$('#xiangxidz').val();//收货地址
+		if(!uname||uname=="请填写收货人"){
+			$("#uname").addClass("cuwudzwx");
+			$("#uname").val('请填写收货人');
+			wxdz=1;
+			return false;
+		}
+		if(!tel || (tel.length!=7 && tel.length!=11) || isNaN(tel)){
+			$("#tel").addClass("cuwudzwx");
+			$("#tel").val('请填写收货人联系电话');
+			wxdz=1;
+			return false;
+		}
+		if(!youbian|| isNaN(youbian)){
+			$("#youbian").addClass("cuwudzwx");
+			$("#youbian").val('请填写邮编');
+			wxdz=1;
+			return false;
+		}
+		if(!xiangxidz||xiangxidz=="请填写详细地址"){
+			$("#xiangxidz").addClass("cuwudzwx");
+			$("#xiangxidz").val('请填写详细地址');
+			wxdz=1;
+			return false;
+		}	
+	$.ajax( {
+        url:"{:U('addon/MemberCenter/MemberCenter/addwxdizhi')}", 
+        type: "post", 
+        data:"tel="+tel+"&uname="+uname+"&szdq="+szdq+"&xiangxidz="+xiangxidz+"&youbian="+youbian,
+        success: function(msg){
+           if(msg['xdzwx']==1){
+           	    wxdz=1;
+           	    layer.msg('添加成功');
+           	    setTimeout(function(){
+                   	setTimeout(' parent.location.reload();',1000);
+                },3000)
+           }else if(msg['xdzwx']==3){
+           		wxdz=1;	
+           		 layer.msg('您未登录，请先登录');
+           	    setTimeout(function(){
+           	    	setTimeout(' parent.location.reload();',1000);
+                },3000)   
+           }else if(msg['xdzwx']==4){
+           		wxdz=1;	
+           		layer.msg('地址最大限度仅保存10条记录');
+           	    setTimeout(function(){
+           	    	setTimeout(' parent.location.reload();',1000);
+                },3000)   
+           }else{
+           		wxdz=1;
+           		layer.msg('添加失败');
+           	    setTimeout(function(){
+           	    	setTimeout(' parent.location.reload();',1000);
+                },3000)   
+           }
+        }
+    });
+
+	}
+	$('#uname').click(function(){
+		var uname=$('#uname').val();
+		if(uname=="请填写收货人"){
+			$("#uname").removeClass("cuwudzwx");
+			$("#uname").val('');
+		}
+		
+	})
+	$('#tel').click(function(){
+		var tel=$('#tel').val();
+		if(tel=="请填写收货人联系电话"){
+			$("#tel").removeClass("cuwudzwx");
+			$("#tel").val('');
+		}
+	})
+	$('#youbian').click(function(){
+		var youbian=$('#youbian').val();
+		if(youbian=="请填写邮编"){
+			$("#youbian").removeClass("cuwudzwx");
+			$("#youbian").val('');
+		}
+	})
+	$('#xiangxidz').click(function(){
+		var xiangxidz=$('#xiangxidz').val();
+		if(xiangxidz=="请填写详细地址"){
+			$("#xiangxidz").removeClass("cuwudzwx");
+			$("#xiangxidz").val('');
+		}
+	})
+	var gdz=1;
+	function xgdiswx(gid){
+		if(gdz==2){return false;}
+		gdz=2;
+		var tel=$('#tel').val();          //电话
+		var uname=$('#uname').val();      //收货人
+		var youbian=$('#youbian').val();  //邮编
+		var szdq=$('#szdq').val();        //所在地址
+		var jiedao=$('#jiedao').val();    //街道
+		var xiangxidz=$('#xiangxidz').val();//收货地址
+		if(!uname||uname=="请填写收货人"){
+			$("#uname").addClass("cuwudzwx");
+			$("#uname").val('请填写收货人');
+			gdz=1;
+			return false;
+		}
+		if(!tel || (tel.length!=7 && tel.length!=11) || isNaN(tel)){
+			$("#tel").addClass("cuwudzwx");
+			$("#tel").val('请填写收货人联系电话');
+			gdz=1;
+			return false;
+		}
+		if(!youbian|| isNaN(youbian)){
+			$("#youbian").addClass("cuwudzwx");
+			$("#youbian").val('请填写邮编');
+			gdz=1;
+			return false;
+		}
+		if(!xiangxidz||xiangxidz=="请填写详细地址"){
+			$("#xiangxidz").addClass("cuwudzwx");
+			$("#xiangxidz").val('请填写详细地址');
+			gdz=1;
+			return false;
+		}	
+		$.ajax( {
+        url:"{:U('addon/MemberCenter/MemberCenter/xiugaidzwx')}", //这里是静态页的地址
+        type: "post", 
+        data:"tel="+tel+"&uname="+uname+"&szdq="+szdq+"&xiangxidz="+xiangxidz+"&youbian="+youbian+"&gid="+gid,
+        success: function(msg){
+           if(msg['is']==1){
+           	  	layer.msg('修改成功');
+           	   	setTimeout(' parent.location.reload();',1000);
+           	    
+           }else if(msg['is']==3){
+           		gdz=1
+           		layer.msg('您未登录，请先登录');
+           	    setTimeout(function(){
+           	    	 setTimeout(' parent.location.reload();',1000);
+                },3000)
+           } else{
+           	    gdz=1;
+           	    layer.msg('修改失败');
+           	    setTimeout(' parent.location.reload();',1000);
+           }
+        }
+    });
+
+	}
+</script>

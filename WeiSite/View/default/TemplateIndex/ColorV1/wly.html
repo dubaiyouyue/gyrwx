@@ -1,0 +1,78 @@
+<form action="/index.php?s=/addon/WeiSite/WeiSite/lypost.html" method="POST" name="myform" id="myform">
+
+<div class="Login1" style=" margin-top:1rem;">
+  <ul>
+    <li>
+      <p class="Code-Pic1">
+        <input type="text" name="bt" id="bt" placeholder="标题" />
+      </p>
+    </li>
+    <li>
+      <p class="Code-Pic1">
+        <input type="text" name="lxr" id="lxr" placeholder="联系人" />
+      </p>
+    </li>
+    <li>
+      <p class="Code-Pic1">
+        <input type="text" name="dh" id="dh" placeholder="联系电话" />
+      </p>
+    </li>
+    <li>
+      <p class="Code-Pic1" style=" height:150px; ">
+        <textarea name="nr" id="nr" style=" width:99%; height:150px; border-top-right-radius: 5px;
+border-bottom-left-radius: 5px;
+border-bottom-right-radius: 5px;
+border-top-left-radius: 5px; border: 1px solid #ccc" placeholder="内容"></textarea>
+      </p>
+    </li>
+  </ul>
+</div>
+
+<div class="leave word">
+
+                    <table cellpadding=0 cellspacing=0 class="table_form"  >
+                            <td>
+                                <input TYPE="button" onclick="checkedformdx();"  value="提交留言" class="button_submit" />
+                                <input TYPE="reset"  value="取消留言" class="button_reset" />
+                            </td>
+                        </tr>
+                    </table>
+
+
+</div>
+</form>
+
+<script>
+<?php
+$ok=$_GET['ok'];
+if($ok=='ok') echo 'alert(\'留言成功\');';
+//if($ok=='zc') echo 'alert(\'注册成功,请补充填写个人资料\');';
+?>
+document.getElementById('bt').focus();
+function checkedformdx(){
+	var bt=$('#bt').val();
+	var lxr=$('#lxr').val();
+	var dh=$('#dh').val();
+	var nr=$('#nr').val();
+	
+	if(!bt){
+		document.getElementById('bt').focus();
+		alert('请填写标题');
+		return false;
+	}if(!lxr){
+		document.getElementById('lxr').focus();
+		alert('请填写联系人');
+		return false;
+	}if(!dh){
+		document.getElementById('dh').focus();
+		alert('请填写电话');
+		return false;
+	}if(!nr){
+		document.getElementById('nr').focus();
+		alert('请填写内容');
+		return false;
+	}
+	document.getElementById('myform').submit();
+}
+</script>
+<div class="clearfix"></div>

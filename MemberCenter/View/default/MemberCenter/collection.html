@@ -1,0 +1,57 @@
+<include file="Public/head_app"/> 
+<!--头部  结束-->
+<div class="dak" style=" padding-bottom:1rem;">
+  <div class="grzl"> <a onclick="javascript:history.back(-1);">
+    <div class="hyjg jfbg" style="margin-top: 55px;">我的收藏</div>
+    </a> </div>
+    </div>
+    
+<volist name='mycollection' id='vo'>
+<div class="wdsc" id='shanchusc{$vo.id}'>
+  <div class="wdsc-1">
+    <a href="{:U('addon/WeiSite/WeiSite/Goods_detail',array(id=>$vo[goods][id]))}">
+    <div class="wdsc-left"><img src="{$vo.goods.cover|get_cover_url}" width="100%" height="" /></div></a>
+    
+<div class="wdsc-right">
+  <a href="{:U('addon/WeiSite/WeiSite/Goods_detail',array(id=>$vo[goods][id]))}"><div class="wdsc-rihgt-wenzi">{$vo.goods.title}</div></a>
+  <div class="wdsc-wenzi2">
+
+   <div class="wdsv-wenzi2-1"><if condition="$vo[goods][price]">￥{$vo.goods.price}</if></div>
+   <a onclick="delshoucang({$vo.id})" id='delshc'><div class="wdsv-wenzi2-2"></div></a>
+  </div>
+
+</div>
+  </div>
+</div>
+</volist>
+<include file="Public/footer_app"/>
+<script type="text/javascript">
+  function delshoucang(boj){
+      layer.confirm('是否删除该数据？请谨慎操作！', {
+          btn: ['确定','取消'] //按钮
+        }, function(){
+          $.ajax({
+                type: "POST",
+                url: "{:U('addon/MemberCenter/MemberCenter/delcollection')}",
+                data: "get_id=" + boj,
+                success: function(msg) {
+                    if(msg['del']==1){
+                      layer.msg('删除成功', {icon: 1});
+                      setTimeout(function(){
+                        $("#shanchusc"+boj).remove();
+                      },3000)
+                    }else if(msg['del']==2){
+                       layer.msg('您未登录，正在前往登录');
+                      setTimeout(function(){
+                        window.location.href="/index.php?s=/addon/Login/Login/index.html"
+                      },3000)
+                    }else {
+                      layer.msg('删除失败！请稍后重试');
+                    }
+                }
+            });
+        }, function(){
+          layer.msg('已取消',{icon: 1});
+        });
+  }
+</script>

@@ -1,0 +1,89 @@
+<include file="Public/head_app"/> 
+<!--头部  结束-->
+<div class="dak" style=" padding-bottom:1rem;">
+  <div class="grzl"> <a onclick="javascript:history.back(-1);">
+    <div class="hyjg jfbg" style="margin-top: 55px;">收货地址</div>
+    </a> </div>
+    </div>
+
+
+
+<div class="grzl">
+<div class="shdz">
+  <div class="shdz-1" style="margin-top:1rem;">
+    <div class="shdz-wenzi">
+      <p>收货人姓名：<if condition="$tihsdz[xm]">{$tihsdz.xm}<else />{$user.name}</if></p> 
+      <p>联系电话： <if condition="$tihsdz[tel]">{$tihsdz.tel}<else />{$user.tel}</if></p>
+      <if condition="$tihsdz[xx]"><p id="dizhiidwx_{$tihsdz.id}" data-urls="{:U('addon/MemberCenter/MemberCenter/Newsaddress',array('wdzid'=>$tihsdz[id]))}">地址： {$tihsdz.xx}<span style="margin-left:5px; color: #FE5200;" onclick="shdzappwx({$tihsdz.id})">【修改】</span><span style="color: #FE5200;" onclick="delnewdzwx({$tihsdz.id})">【删除】</span></p></if>
+      <volist name="newdzwx" id="vo">
+        <p id="dizhiidwx_{$vo.id}" data-urls="{:U('addon/MemberCenter/MemberCenter/Newsaddress',array('wdzid'=>$vo[id]))}">地址 {$i}：{$vo.xx}<span style="margin-left:5px; color: #FE5200;" onclick="shdzappwx({$vo.id})">【修改】</span><span style="color: #FE5200;" onclick="delnewdzwx({$vo.id})">【删除】</span></p> 
+      </volist>
+    </div>
+  </div>
+  
+   <div class="sgdz-bc">
+     
+     <a onclick="addnewdzwx()" ><div class="shdz-right"><p>使用新地址</p></div></a>
+   <!-- href="{:U('addon/MemberCenter/MemberCenter/newsaddress')}" -->
+   </div>
+</div>
+<include file="Public/footer_app"/>
+<script type="text/javascript">
+  //添加地址
+  function addnewdzwx(){
+    layer.open({
+    type: 2,
+    title: '添加新地址',
+    shadeClose: true,
+    shade: 0.8,
+    area: ['100%', '100%'],
+    content: "{:U('addon/MemberCenter/MemberCenter/newsaddress')}"
+  }); 
+  }
+  // 删除地址
+  var scwx=1;
+  function delnewdzwx(did){
+    if(scwx==2){return false;}
+    scwx=2;
+    layer.confirm('是否删除该数据？请谨慎操作！', {
+
+          btn: ['确定','取消'] //按钮
+        }, function(){
+          layer.msg('正在删除，请稍后...');
+    $.ajax({
+      type: "POST",
+      url: "{:U('addon/MemberCenter/MemberCenter/deldizhiwx')}",
+      data:"did=" + did,
+        success: function(msg) {
+          if(msg['dlwx']==1){
+              scwx=1;
+              layer.msg('删除成功', {icon: 1});
+            $("#dizhiidwx_"+did).remove();
+            setTimeout(' location.reload();',1000);
+          }else if(msg['dlwx']==2||!msg){
+            scwx=1;
+             layer.msg('删除失败，请稍后重试', {icon: 2});
+          }else if(msg['dlwx']==3){
+            scwx=1;
+            window.location.href="/index.php?s=/addon/Login/Login/index.html"
+          }
+        }
+    });
+    }, function(){
+          scc=1;
+          layer.msg('已取消',{icon: 1});
+        });
+  }
+  //修改地址
+  function shdzappwx(dzid){
+    var urls=$("#dizhiidwx_"+dzid).attr("data-urls");
+    layer.open({
+    type: 2,
+    title: '修改地址',
+    shadeClose: true,
+    shade: 0.8,
+    area: ['100%', '100%'],
+    content:urls
+  }); 
+  }
+</script>

@@ -1,0 +1,236 @@
+<include file="Public/head_app"/> 
+<!--商品图切换-->
+  <div class="banner11">
+  <!---------------------------------- container开始 ---------------------------------->
+<!--幻灯片-->
+    <script type="text/javascript" src="js/prefixfree.min.js"></script>
+    <script type="text/javascript" src="js/flipsnap.min.js"></script>
+	<script>
+	var ww=$(window).width();
+	//banner
+	var w=428;
+	var h=300;
+	var b=1;
+	var newsssheigtg=(ww*b*h)/w;
+new_widht_baifenbi_kuandu=1;
+var xiaoxunews=ww-(182/360)*ww;
+document.write("<style>.index-h-l-wenzi{width:"+xiaoxunews+"px;top: 50%;margin-top: -28rem;}</style>");
+
+</script>
+    <script type="text/javascript" src="js/mobile_module.js"></script>
+    <script type="text/javascript" src="js/admin_common.js"></script>
+<div class="container" style="padding-top:2.75rem;">
+            <section class="banner">
+                <ul>
+					<li><a href="#"><img src="images/44_s1.jpg"></a></li>
+					<li><a href="#"><img src="images/45.jpg"></a></li>
+					<li><a href="#"><img src="images/46.jpg"></a></li>
+					<li><a href="#"><img src="images/47.jpg"></a></li>
+				</ul>
+        <span class="identify" >
+		        <em class="cur"></em>
+        <em ></em>
+        <em ></em>
+         <em ></em>
+		</span>
+            </section></div><script type="text/javascript">
+    $(function(){
+        $.WeiPHP.initBanner(true,5000);
+        $.WeiPHP.setRandomColor('.random_color');
+    })
+</script>
+<!--幻灯片-->
+<!---------------------------------- container结束 ---------------------------------->
+
+  
+  </div>
+  
+<!--2016.11.29 尺寸--->
+<?php
+  //dump($kc);
+  //获取颜色
+  $yanseee=explode('moweilin',$good['kc']);
+  //dump($yanseee);
+  foreach($yanseee as $ks=>$vs){
+    $ysssaaa=explode('lizhenqiu',$vs);
+    $yansearr[]=$ysssaaa['0'];
+    $yuccmmck=$yuccmmck?$yuccmmck.'-'.$ysssaaa['0'].$ysssaaa['1'].'-'.$ysssaaa['3']:$ysssaaa['0'].$ysssaaa['1'].'-'.$ysssaaa['3'];
+  }
+  $yansearr=(array_unique($yansearr));
+  //dump($yuccmmck);
+?>
+<!--end-->
+
+
+
+
+
+
+
+<div class="spxqy">
+  <div class="sqxqy-1"><strong>￥{$good.price}</strong></div>
+   <div class="sqxqy-2">￥{$good.cprice}</div>
+
+</div>
+<div class="sqxqy-3">{$good.description}</div>
+
+
+<div class="sqxqy-cm">
+  <div class="sqxqy-cma"><strong>尺码</strong></div>
+  <div class="cc">
+    <a href="#"><div class="cc-1">S(155-80A)</div></a>
+     <a href="#"><div class="cc-2">M(160/84A)</div></a>
+     <a href="#"><div class="cc-2">L(165/88A)</div></a>
+  
+  </div>
+  <div class="cc1">
+     <a href="#"><div class="cc-3">XL(170-90A)</div></a>
+     <a href="#"><div class="cc-2">XXL(175/96A)</div></a>
+  </div>
+
+<!--颜色 2016.11.29-->
+  <div class="sqxqy-cma"><strong>颜色</strong></div>
+  <div class="cc">
+    
+    <?php
+    foreach ($yansearr as $yk => $vy) {
+      echo '<a href="#"><div class="cc-1 cc-2">'.$vy.'</div></a>';
+    }
+   ?>
+     
+  
+  </div>
+
+<!--end-->
+
+
+
+
+
+
+
+
+
+
+     <div class="spxqy-sl">
+       <div class="sl">数量：</div>
+       <div class="sl-1">
+         <a id='jian'><div class="sl-2">-</div></a>
+         <div class="sl-3"><input style="width:100%; height:1.1rem;text-align:center" type='text' id='mun'  name='mun' value='1'></div>
+         <a id='jia'><div class="sl-4">+</div></a>
+       
+       </div>
+       
+     </div>
+     <div class="ppbz">
+      <a href="#"> <div class="ppbz-1">品牌保证</div></a>
+       <a href="#"><div class="ppbz-2">实拍认证</div></a>
+     </div>
+     <div class="spxx">
+      <a href="#"><div class="spxx-1">商品信息</div></a>
+      <a href="#"><div class="spxx-2">商品信息</div></a>
+     </div>
+    <div class="spxx-3">
+      <p>分类：{$good.Sfenlei}</p>
+      <p>面料：{$good.Smiaoliao}</p>
+      <p>风格：{$good.Sfengge}</p>
+      <p>袖型：{$good.Sxiux}</p>
+      <p>领型：{$good.Slingxing}</p>
+      <p>款式：{$good.Kuans}</p>
+      <p>库存：{$good.kc}</p>
+
+    </div>
+    <div class="sqxqy-cma1">
+      	<!-- <div class="sqxqy-cma"><strong>商品图片</strong></div>
+      	<div class="xqy-tu"><img src="images/20_r1_c1.jpg" width="100%" height="" /></div>
+        <div class="xqy-tu"><img src="images/20_r3_c1.jpg" width="100%" height="" /></div>
+        <div class="xqy-tu"><img src="images/20_r4_c1.jpg" width="100%" height="" /></div>
+        <div class="xqy-tu"><img src="images/20_r5_c1.jpg" width="100%" height="" /></div>
+        <div class="xqy-tu"><img src="images/20_r6_c1.jpg" width="100%" height="" /></div>
+        <div class="xqy-tu"><img src="images/20_r7_c1.jpg" width="100%" height="" /></div>   -->
+        {$good.content}                         
+    </div>
+  <input type="hidden" id="kucun" value="{$good.kc}">
+</div>
+  <!----------------------------foom 开始-->
+<div class="xqy-db">
+    <div class="xqy-db-1">
+        <a onclick="jrgwc({$good.id})"><div id="mycart" class="xqy-gwc">加入购物车</div></a>
+        <a href="#"><div class="xqy-ligm">立即购买</div></a>
+    </div>
+</div>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.min.js"></script>
+<link rel="stylesheet" href="/css/animate.min.css">
+<script type="text/javascript" src="/js/tishicengjsqiu.js"></script>
+<script type="text/javascript">
+	function tishicengjsqiuonclick(textwz,nicheng,iddtt=3){
+		$('body').tishicengjsqiu({
+			textwz:  textwz, //提示层文字 支持html
+			tishicbj: '#ff662d', //提示层背景 #ddd
+			colors: '#fff', //文字颜色
+			iddtt:iddtt, //自动关闭时间秒
+			admmint:'flipInX', //显示动画
+			//动画属性说明
+			admmout:'zoomOut' //隐藏动画
+		});
+		document.getElementById(nicheng).focus();
+	}
+	var key=1;
+	function jrgwc(good_id){
+		if(key==2){return false;}
+			tishicengjsqiuonclick('正在提交...','mycart');
+		key=2;
+		var mun = $('#mun').val();
+		$.ajax({
+            type: "POST",
+            url: "{:U('addon/MemberCenter/MemberCenter/Cart_add')}",
+            data: "good_id=" + good_id+"&get_mun="+mun,
+            success: function(msg) {
+              	if(msg['is']==1){
+              		key=1;
+              		tishicengjsqiuonclick('成功将数量为'+mun+'加入购物车','mycart');
+              	}else if(msg['is']==2){
+              		key=1;
+              		tishicengjsqiuonclick('失败','mycart');
+              	}else if(msg['is']==3){
+              		key=1;
+              		tishicengjsqiuonclick('您未登录，正前往登录','mycart');
+              		setTimeout(function(){
+              			window.location.href="/index.php?s=/addon/Login/Login/index.html"
+					        },3000)
+              	}
+            }
+        });
+		
+	}
+	$('#jian').click( function(){
+		var sum=$('#mun').val();
+		if(sum>1){
+			sum--;
+			$('#mun').val(sum);
+		}
+	})
+	$('#jia').click( function(){
+		var kc=$('#kucun').val();
+		var sum=$('#mun').val();
+		if(sum<kc){
+			sum++;
+			$('#mun').val(sum);
+		}
+	})
+	$('#mun').blur(function(){
+		var sum=$('#mun').val();
+    var kc=$('#kucun').val();
+    if(sum>kc){
+      sum=kc;
+      $('#mun').val(sum);
+    }
+		if((/^(\+|-)?\d+$/.test( sum ))&&sum>0){  
+      $('#mun').val(sum);
+		}else{
+      sum=1;
+      $('#mun').val(sum);
+
+    }
+	})
+</script>

@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="textml;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<title>忘记密码</title>
+<!--css start-->
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="/css/master.css" rel="stylesheet"/>
+<!--css end-->
+<script src="js/jquery-1.11.0.min.js"></script>
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body style="padding-bottom:3rem; background:#FFF;">
+  <div class="Login">
+    <div class="zc-logo"><a href="/index.php?s=/addon/WeiSite/WeiSite/index.html"><img src="images/5/zc-logo.png"/></a></div>
+    
+    <h2><strong>忘记密码</strong></h2>
+    <ul>
+         <li>
+            <h3>旧密码：</h3>
+        <p>
+          <input type="password"  maxlength="16" id='passold' name='passold' placeholder="6-16个字符，区大小写" />
+        </p>
+      </li>
+            <li>
+             <h3>新密码：</h3>
+        <p>
+          <input type="password" maxlength="16" id="passnew" name="passnew"  placeholder="6-16个字符，区大小写" />
+        </p>
+      </li>
+    <li class="Login-Btn">
+        <a onclick="jiumima();"  id='xiugai'>确定</a>
+      </li>
+    </ul>
+      <div class="dxf">
+             <p><a onclick="dxyangzh()">不想用密码验证？请更换其他验证方式。</a></p>
+           </div>
+            
+  </div>
+   <input type="hidden" id="telsaasmm" value="{$zhanghao}">
+</body>
+</html>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.min.js"></script>
+<link rel="stylesheet" href="/css/animate.min.css">
+<script type="text/javascript" src="/js/tishicengjsqiu.js"></script>
+<script type="text/javascript">
+  function tishicengjsqiuonclick(textwz,nicheng){
+    $('body').tishicengjsqiu({
+      textwz:  textwz, //提示层文字 支持html
+      tishicbj: '#ff662d', //提示层背景 #ddd
+      colors: '#fff', //文字颜色
+      iddtt:3, //自动关闭时间秒
+      admmint:'flipInX', //显示动画
+      //动画属性说明
+      admmout:'zoomOut' //隐藏动画
+    });
+    document.getElementById(nicheng).focus();
+  }
+  function jiumima(){
+    var passold=$("#passold").val();
+    var passnew=$("#passnew").val();
+    var tel=$("#telsaasmm").val();
+    if(!passold || (passold.length<6)){
+        tishicengjsqiuonclick('请输入6-16位字符的旧密码','passold');
+        return false;
+    }
+     if(!passnew || (passnew.length<6)){
+        tishicengjsqiuonclick('请输入6-16位字符的新密码','passnew');
+        return false;
+    }
+    $.ajax({
+        type: "POST",
+        url: "{:U('addon/Rpass/Rpass/edit_qb')}",
+        data: "passold=" + passold+"&passnew="+passnew+"&tel="+tel,
+        success: function(msg) {
+            if(msg['xg']==1){
+               tishicengjsqiuonclick('修改成功','xiugai');
+                setTimeout(function(){
+                    window.location.href="/index.php?s=/addon/Login/Login/index.html"
+                 },3000)
+            }else if(msg['xg']==3){
+               tishicengjsqiuonclick('请输入正确的原密码','xiugai');
+            }else{
+               tishicengjsqiuonclick('修改失败','xiugai');
+            }
+            
+        }
+    });  
+ 
+  }
+   function dxyangzh () {
+    var tels=$("#telsaasmm").val();
+    window.location.href='/index.php?s=/addon/Rpass/Rpass/dxyz/zhanghao/'+tels+'.html'
+  }
+</script>

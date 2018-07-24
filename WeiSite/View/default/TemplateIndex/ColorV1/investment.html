@@ -1,0 +1,86 @@
+
+
+<!--招商动态 开始-->
+
+<div class="China-2" id="sfsdfsssshtml" style="    float: none;">
+  
+  <volist name="dynrlb" id="vo">
+<div class="China clearfix" >
+  <div class="China-2">
+    <a href="/index.php?s=/addon/WeiSite/WeiSite/yqymnry/cate_id/{$vo.cate_id}/id/{$vo.id}.html"><div class="China-xinwen">{$vo.title}</div></a>
+    <a href="/index.php?s=/addon/WeiSite/WeiSite/yqymnry/cate_id/{$vo.cate_id}/id/{$vo.id}.html"><div class="China-xinwen1">{$vo.intro}</div></a>
+  </div>  
+ </div></volist>
+
+
+
+
+ 
+</div>
+
+<!--招商动态 结束-->
+
+<div id="sfsdfssss" onclick="sslyss();" style="
+    background: green;
+    color: #fff;
+    border-radius: 3px;
+    width: 100px;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 1rem;
+    padding: 6px 0px;
+">查看更多</div>
+
+
+<script>
+	nyyyyn=1;
+	//sslyss();
+	function sslyss(){
+	$("#sfsdfssss").text('加载中...');
+	$.ajax( {
+			url: '/index.php?s=/addon/WeiSite/WeiSite/hqgddd/cate_id/{$cate_id}/p/'+nyyyyn+'/th/investmentajax.html', //这里是静态页的地址
+			type: "GET", //静态页用get方法，否则服务器会抛出405错误
+			success: function(data){
+				if(data=='no'){
+					$("#sfsdfssss").text('没有了');
+					return false;
+				}
+				//var result = $(data).find("另一个html页面的指定的一部分").html();
+				$("#sfsdfsssshtml").append(data);
+				$("#sfsdfssss").text('查看更多...');
+				nyyyyn=nyyyyn+1;
+			}
+	});
+	}
+</script>
+
+<!--翻页start-->
+<div class="paging" style="display:none;">
+   <div class="cd">
+     <a href="#"><div class="pageUp">上一页</div></a>
+     <div class="middle">
+       <ul>
+         <a href="#"><li style="margin-left:0.4rem; background-color:#2C9C37; color:#FFF;">1</li></a>
+          <a href="#"><li style="margin-left:0.4rem;">2</li></a>
+           <a href="#"><li style="margin-left:0.4rem;">3</li></a>
+       </ul>
+     </div>
+          <a href="#"><div class="pageUp">下一页</div></a>
+
+        
+
+   </div>
+ 
+ 
+</div>
+
+
+
+<!--翻页end-->
+
+
+
+
+
+
+<div class="clearfix"></div>

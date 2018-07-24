@@ -1,0 +1,140 @@
+<include file="Public/head_app"/>  
+
+<div class="banner3" style="width:100%; margin-top:55px;">
+  <span class="banner2" style="width:100%; margin-top:2.55rem;">
+    <if condition="$iconimg"><img src="{$iconimg|get_cover_url}" width="100%" height="" /></if>
+  </span>
+</div>
+<style type="text/css">
+  .ppjs-top66l{width: 32.2%;
+    height: 1.75rem;
+    background-color: #ff5d00;
+    text-align: center;
+    line-height: 1.75rem;
+    font-size: 16px;
+    color: #FFF;
+    float: left;
+    margin-right: 0.24rem;}
+   .ppjs-top4l{width: 32.2%;
+    height: 1.75rem;
+     background-color: #a4a4a4;
+    text-align: center;
+    line-height: 1.75rem;
+    font-size: 16px;
+    color: #FFF;
+    float: left;
+    margin-right: 0.24rem;
+  }
+</style>
+<!----------------------banner 开始-------------->
+<div class="ppjs">
+  <div class="ppjs-1">
+    <div class="ppjs-top">
+      <volist name='khzx' id='vo'>
+        <a href="<if condition="$vo['id'] eq 69">http://wpa.qq.com/msgrd?v=3&uin={$pall.dhqq}<else />{:U('addon/WeiSite/WeiSite/Customer',array(cate_id=>$vo[id]))}</if>"><div <if condition="$cate_id eq $vo[id]">class="ppjs-top66l"<else />class="ppjs-top4l"</if><if condition='$i eq 3 '>style="margin-right: 0rem;"</if>>{$vo.title}</div></a>
+      </volist>
+    <!--   <a href="#"><div class="ppjs-top66">在线客服</div></a>
+      <a href="#"><div class="ppjs-top66">微留言</div></a>    -->
+    </div> 
+  <if condition="$cate_id eq 71">
+    <div class="znkf-1">
+      <p style="color:#F00;">以下内容后期可在后台进行排版更改。</p>
+      <p>您好，很高兴为您服务，回复以下关键字，快捷了解相关业务信息：</p>
+      <p>·回复会员积分卡，了解如何查询会员卡信息、积分查询及使用。</p>
+      <p>·回复营业时间，了解门店营业时间。</p>
+      <p>·回复绑定，了解广羽人实体卡如何绑定微会员卡。</p>
+      <p>·回复退换货，了解广羽人商品退换货规则。</p>
+      <p>·回复营业时间，了解门店营业时间。</p>
+      <p>·回复微信商城，了解微信商城订单发货时间、物流在途时间、退款问题等（咨询微信商城其他问题可添加微信商城QQ客服4008939833，或拨打微信商城客服热线咨询：4008939833按2号键咨询哦）。</p>
+      <p>·回复其他内容信息，在线客服为您服务。</p>
+      <p>·查询商品或新品情况，可直接到实体门店咨询购买或者进入微信商城查询的哦</p>
+      <p style="padding-bottom:0.5rem;">·微客服上班时间：9:00-17:30（节假日除外）。</p>
+    </div>
+  </if>
+  <if condition="$cate_id eq 70">
+    <!--在线留言start-->
+    <div class="message" style=" margin-top:1rem;">
+      <p>您的姓名<span>  NAME</span></p>
+      <input name="username" id="username" type="text" maxlength="10" placeholder="请填写姓名" style="outline:medium;">
+      <p>您的电话<span>  TELPHONE</span></p>
+      <input name="tels" id="tels" type="text" placeholder="请填写联系电话" style="outline:medium;">
+      <p>标题<span>  TITLE</span></p>
+      <input name="title" id="title" type="text" maxlength="20" placeholder="请填写标题（1~20）个字符" style="outline:medium;">
+      <p>留言内容<span>  MESSAGE</span></p>
+      <textarea style="width:93%; height:7.5rem; border:1px solid #CCC; border-radius:0.5rem; float:left; margin:1% 0 0 0%; padding:0 0.5rem; line-height:1rem; outline:medium; resize: none;"name="content" id="content" maxlength="300" placeholder="请输入您的留言内容10-300个字以内" cols="" rows=""></textarea>
+      <input style=" width:98%; float:left; margin:1%; height:1.75rem; border-radius:1.1rem;text-align: -webkit-auto; color:#FFF; text-align:center; margin-top:1.5rem; margin-bottom:1.5rem; background-color:#D39343; outline:medium;" type="button" id="tjlywwc"  onclick="messagety()" value="提交留言">
+    </div>
+    <!--在线留言end-->
+  </if>
+  </div>
+  <input type="hidden" id="denglu" value="{$user.id}">
+  <div class="clearfix"></div>
+</div>
+<include file="Public/footer_app"/>           
+<script type="text/javascript">
+  function messagety () {
+    var lognid=$("#denglu").val();
+    var name=$("#username").val();
+    var tel=$("#tels").val();
+    var content=$("#content").val();
+    var title=$("#title").val();
+    if(!name){
+      layer.tips('请填写姓名', '#username', {
+          tips: [1, '#ff5d00'] //还可配置颜色
+      });
+      $("#username").focus();
+      return false;
+    }
+   if(!tel || (tel.length!=7 && tel.length!=11) || isNaN(tel)){
+      layer.tips('请填写正确的联系电话', '#tels', {
+          tips: [1, '#ff5d00'] //还可配置颜色
+      });
+      $("#tels").focus();
+       return false;
+    }
+    if(!title){
+      layer.tips('请填写标题（1~20）个字符', '#title', {
+          tips: [1, '#ff5d00'] //还可配置颜色
+      });
+      $("#title").focus();
+      return false;
+    }
+    if(!content){
+      layer.tips('请输入您的留言内容10-300个字以内', '#content', {
+          tips: [1, '#ff5d00'] //还可配置颜色
+      });
+      $("#content").focus();
+       return false;
+    }
+     $.ajax({
+            type: "POST",
+            url: "{:U('addon/WeiSite/WeiSite/weily')}",
+            data: "name=" + name+"&tel="+tel+"&content="+content+"&lognid="+lognid+"&title="+title,
+            success: function(msg) {
+                if(msg['isly']==1){
+                  layer.msg('留言提交成功');
+                }else if(msg['isly']==2||!msg){
+                  layer.msg('留言提交失败');
+                }else if(msg['isly']==3){
+                  layer.msg('每天只能提交一次留言，请您明天再来');
+                }else if(msg['isly']==4){
+                  layer.confirm('您未登录，是否前往登录？', {
+                    btn: ['是','否'] //按钮
+                  }, function(){
+                    window.location.href="/index.php?s=/addon/Login/Login/index.html"
+                  }, function(){
+
+                  });
+                }
+            }
+
+
+      });
+    // layer.tips('暂时无法提交留言', '#tjlywwc', {
+    //       tips: [1, '#ff5d00'] //还可配置颜色
+    //   });
+  }
+   
+</script>         
+             
+      

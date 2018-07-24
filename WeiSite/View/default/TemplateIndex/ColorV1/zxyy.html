@@ -1,0 +1,84 @@
+<form action="/index.php?s=/addon/WeiSite/WeiSite/zxyyrpost.html" method="POST" name="myform" id="myform">
+<div class="submit_box">
+         <p><span>*</span>标题：</p><input name="bt" id="bt" type="text">
+          <p><span>*</span>留言内容：</p><textarea name="nr" id="nr" cols="" rows=""></textarea>
+         
+         <p><span>*</span>联系人：</p><input name="lxr" id="lxr" type="text">
+         <p><span>*</span>联系电话：</p><input name="dh" id="dh" type="text">
+         <p><span>*</span>电子邮箱：</p><input name="yx" id="yx" type="text">
+        
+      
+<div class="clearfix"></div>
+
+
+</div>
+ 
+ 
+ 
+ 
+  
+</div>
+           <div class="anniu" style=" margin-left:4.2rem; margin-top:1rem; margin-bottom:1.5rem;"><input class="submit_button" style="width:4.25rem; color:#FFF; height:1.5rem; border:1px solid #F00; background-color: #F60;" name="" onclick="checkedformdx();" type="button" title="提交预约" value="提交预约" />
+         
+         <input class="cancel_button" style="width:4.25rem; height:1.5rem; border:1px solid #999; margin-left:0.5rem; background-color: #ccc;" name="" type="reset" title="取消预约" value="取消预约" /></div>
+
+		<div style="
+    text-align: center;
+    margin-bottom: 18px;
+"><a href="http://wpa.qq.com/msgrd?v=3&uin={$peizhihq.dhqq}&site=http://www.resonance.com.cn/&menu=yes"><img src="qqyy.png" /></a></div>
+		 
+		 
+<div class="ppointment" style="display:none;">
+  <div class="order">
+    <div class="order-1">
+      <div class="qq"></div>
+       <a href="http://wpa.qq.com/msgrd?v=3&uin={$peizhihq.dhqq}&site=http://www.resonance.com.cn/&menu=yes"><div class="yy">QQ在线预约</div></a>
+    </div>
+  </div>
+</div>
+
+</form>
+
+<script>
+<?php
+$ok=$_GET['ok'];
+if($ok=='ok') echo 'alert(\'在线预约提交成功\');location.href = \'/index.php?s=/addon/WeiSite/WeiSite/investment/cate_id/17.html\';';
+?>
+document.getElementById('bt').focus();
+function checkedformdx(){
+	var bt=$('#bt').val();
+	var nr=$('#nr').val();
+	var lxr=$('#lxr').val();
+	var dh=$('#dh').val();
+	var yx=$('#yx').val();
+	
+	if(!bt){
+		document.getElementById('bt').focus();
+		alert('请填写标题');
+		return false;
+	}if(!nr){
+		document.getElementById('nr').focus();
+		alert('请填写内容');
+		return false;
+	}if(!lxr){
+		document.getElementById('lxr').focus();
+		alert('请填写联系人');
+		return false;
+	}if(!dh){
+		document.getElementById('dh').focus();
+		alert('请填写电话');
+		return false;
+	}if(!yx){
+		document.getElementById('yx').focus();
+		alert('请填写邮箱');
+		return false;
+	}
+	document.getElementById('myform').submit();
+}
+</script>
+
+
+
+
+
+<div class="clearfix"></div>

@@ -1,0 +1,121 @@
+<include file="Public/head_app"/> 
+<!----------------------banner 开始-------------->
+<div class="banner1" style="width:100%; margin-top: 55px;">
+	<if condition="$iconimg">
+		<img src="{$iconimg|get_cover_url}" width="100%" />
+	</if>
+</div>
+<!----------------------banner 开始-------------->
+<style type="text/css">
+	 .ppjs-top1l{
+	    width: 32.2%;
+	    height: 1.75rem;
+	    background-color: #ff5d00;
+	    text-align: center;
+	    line-height: 1.75rem;
+	    font-size: 16px;
+	    color: #FFF;
+	    float: left;
+	    margin-right: 0.24rem;
+	}
+   .ppjs-top2l{
+	   	width: 32.2%;
+	    height: 1.75rem;
+	     background-color: #a4a4a4;
+	    text-align: center;
+	    line-height: 1.75rem;
+	    font-size: 16px;
+	    color: #FFF;
+	    float: left;
+	    margin-right: 0.24rem;
+  }
+  .lxwm p img{ width: 100%}
+</style>
+<div class="ppjs">
+<div class="ppjs-1">
+      <div class="ppjs-top" >
+        <volist name='dynr' id='vo'>
+         <a href="{:U('addon/WeiSite/WeiSite/about',array(cate_id=>$cate_id,post_id=>$vo[id]))}"><div  class="<if condition='$getid eq $vo[id]'>ppjs-top1l<else/>ppjs-top2l</if>" style="<if condition='$i eq 3'>margin-right: 0rem;</if>">{$vo.title}</div></a>
+        </volist>
+      </div>
+         
+         <div class="lxwm">
+	        <if condition="$getid eq 37">
+	           <h3>{$posts.title}</h3>
+	       	</if>
+           <!--联系我们 电话-->
+      <div class="lxwm1">
+     {$posts.content}
+      </div> 
+            
+         </div> 
+         
+         
+<?php
+	$zms=array(
+		'1'=>'A',
+		'2'=>'B',
+		'3'=>'C',
+		'4'=>'D',
+		'5'=>'E',
+		'6'=>'F',
+		'7'=>'G',
+		'8'=>'H',
+		'9'=>'I',
+		'10'=>'J',
+		'11'=>'K',
+		'12'=>'L',
+		'13'=>'M',
+		'14'=>'N',
+		'15'=>'O',
+		'16'=>'P',
+		'17'=>'Q',
+		'18'=>'R',
+		'19'=>'S',
+		'20'=>'T',
+		'21'=>'U',
+		'22'=>'V',
+		'23'=>'W',
+		'24'=>'X',
+		'25'=>'Y',
+		'26'=>'Z'
+	);
+
+
+	//$meidanfenbu[]=$Mdianfenbuapi;
+	//dump($Mdianfenbuapi);
+	
+	foreach($Mdianfenbuapi as $i=>$rddd){
+		$ik++;
+		if($nnssvs) $nnssvs.= ',{ title: "'.$rddd['mingc'].'", point: "'.$rddd['zuobo'].'", address: "'.$rddd['dizhi'].'",tel:"'.$rddd['tel'].'"}';
+		else $nnssvs= '{ title: "名称：'.$rddd['mingc'].'", point: "'.$rddd['zuobo'].'", address: "'.$rddd['dizhi'].'",tel:"'.$rddd['tel'].'"}';
+
+   }
+?>
+		 <!--2016.11.24 只有联系我们显示 附近门店-->
+		 <if condition="$posts.cate_id eq 37">
+         <div class="lxwm3">
+           <h3>附近门店</h3>
+           <!--联系我们 电话--><volist name='Mdianfenbuapi' key="ik" id='v'>
+      <div class="fjmd">
+     <ul><?php
+			$lns=explode(',',$v['zuobo']);
+			$ln=$lns['0'];
+			$la=$lns['1'];
+	 ?>
+     <li onclick="getdddsnew('{$ln}','{$la}','{$v.mingc}','{$v.dizhi}','{$v.tel}');"><span style="color:red;"><?php echo $zms[$ik];?></span> {$v.mingc}</li>
+     <p>{$v.dizhi}</p>
+     </ul>
+     
+     </div>
+      </volist>
+        
+    </div>
+	<div class="detu" id="map"></div>
+	<include file="TemplateIndex/ColorV1/mdfb"/> 	
+	</if>  
+  </div>
+<div class="clearfix"></div>
+
+</div>
+<include file="Public/footer_app"/> 

@@ -1,0 +1,49 @@
+<include file="Public/head_app"/> 
+<div class="dak" style=" background-color:#FFF;"> 
+<div class="grzl" >
+<a onclick="javascript:history.back(-1);" ><div class="hyjg jfbg" style="position: fixed;z-index:99;margin-top:55px" >会员积分</div></a>
+<!-------------当前总积分 开始----------->
+<div style="height:90px;width:100%;"></div>
+ <h3 style=" margin-left:0.5rem; margin-top:1rem; margin-right:0.5rem; ">当前总积分：<strong>{$ulist.jifen}</strong></h3>
+    <div class="hyjf-1"  >
+      <div class="hyjf-left">
+        <p>变更时间</p>
+      </div>
+      <div class="hyjf-zz"><p>积分</p></div>
+      <div class="hyjf-right"><p>用途</p></div>
+    </div>
+    <style>
+	.fdsafadsfdasfdsa li{float:left;    float: left;
+    padding: 8px 0px;
+    border-bottom: 1px solid #ddd;line-height: 20px;}
+	</style>
+<!-------------当前总积分 结束----------->
+
+    
+<foreach name="jlist" item="vo">
+<?php
+$jtypeone='-';
+$jtypetwo='使用';
+if($vo['jtype']==1){
+	$jtypeone='+';
+	$jtypetwo='获得';
+}
+
+?>
+<ul class="fdsafadsfdasfdsa">
+<li style="
+    width: 59%;    text-align: center;
+"><?php
+	echo date('Y-m-d H:i:s',$vo['ctime']);
+?></li>
+<li style="
+    width: 20%;    text-align: center;
+">{$jtypeone} {$vo.jifen}</li>
+<li style="width: 21%;text-align: center;">{$jtypetwo}</li>
+</ul>
+</foreach>
+  
+ <div class="clearfix"></div>
+
+<!----------------------------foom 开始-->
+<include file="Public/footer_app"/>  

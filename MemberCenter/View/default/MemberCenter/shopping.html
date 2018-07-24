@@ -1,0 +1,227 @@
+<include file="Public/head_app"/> 
+<!--头部  结束-->
+<div class="dak" style=" padding-bottom:1rem;">
+  <div class="grzl"> <a onclick="javascript:history.back(-1);">
+    <div class="hyjg jfbg" style="margin-top: 55px;">购物车</div>
+    </a> </div>
+    </div>
+    <volist name="get_carts" id='vo'>
+      <div id="dangqian_{$vo.id}" class="shoppingBox">
+        <a onclick="cssa({$vo.id})" data-id="{$vo.id}" data-num="{$vo.number}"  id="css_{$vo.id}" class="choose far" style=" margin-left:0.5rem;"></a>
+        <a  href="{:U('addon/WeiSite/WeiSite/Goods_detail',array(id=>$vo[product_id]))}"><img style="width:70px; height:94px" class="shoppingPic" src="{$vo.product_thumb|get_cover_url}"/>
+        <p class="shoppingName">{$vo.product_name}</p></a>
+        <ul class="shoppingTit">
+          <li>
+            <p>颜色：<span>{$vo.ys}</span></p>
+          </li>
+          <li>
+            <p>尺寸：<span>{$vo.cm}</span></p>
+          </li>
+        </ul><!-- price cprice -->
+        <p class="shoppingRmb"> <span>{$vo.gprice}</span> <i>{$vo.gcprice}</i> </p>
+        <div class="shoppingNumber"> <a  onclick="reduces({$vo.id})" class="shoppingNumber-L" style=" text-align:center; line-height:1.05rem;">-</a>
+          <input type="text" style="text-align:center" name="number" onblur="newnumber({$vo.id})" data-numder="{$vo.number}" id="number_{$vo.id}" value="{$vo.number}" />
+          <a onclick="adds({$vo.id})" class="shoppingNumber-R" style=" text-align:center; line-height:1.05rem;" >+</a> </div>
+        <a onclick="deletes({$vo.id})" class="shoppingDet"><img src="images/22.png"/> </a>
+        <div class="clear"></div>
+      </div>
+      <input type="hidden" id="ylnumber_{$vo.id}" value="{$vo.number}">
+      <input type="hidden" id="kucuns_{$vo.id}" value="{$vo.kcs}">
+      <input type="hidden" id="price_{$vo.id}" value="{$vo.gprice}">
+    </volist>
+    <input type="hidden" id="zongjia" value="{$sum}">
+    <div style=" margin-bottom:4rem;"></div>
+  <!----------------------------foom 开始-->
+    <div class="gwc-js"  >
+        <div class="gwc-js1">合计：<strong id="heji">￥{$sum}</strong></div>
+        <a ><div id='shuliang' class="gwc-js2">结算<if condition="$sumcount">（{$sumcount}）</if></div></a>
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="/js/layer/layer.js"></script>
+<script type="text/javascript">
+    function  reduces(_obj){
+      var ylmun=$('#ylnumber_'+_obj).val();
+      var mun=$('#number_'+_obj).val();
+      var price=$('#price_'+_obj).val();
+      var hj=$('#zongjia').val();
+      if($("#css_"+_obj).hasClass("far")){
+        if(mun>1){
+          mun--;
+
+          hj=hj-price;
+          $('#number_'+_obj).val(mun);
+          $('#ylnumber_'+_obj).val(mun);
+          $('#css_'+_obj).attr('data-num',mun)
+          $('#zongjia').val(hj);
+          $('#heji').text('￥'+hj.toFixed(2));
+        }
+      }
+    }
+    function  adds(_this){
+      var ylmun=$('#ylnumber_'+_this).val();
+      var price=$('#price_'+_this).val();
+      var hj=$('#zongjia').val();
+      var kcs=$('#kucuns_'+_this).val();
+      var mun=$('#number_'+_this).val();
+      if($("#css_"+_this).hasClass("far")){
+        if( Number(mun)< Number(kcs)){
+          mun++;
+          hj=Number(hj) + Number(price*(mun-ylmun));
+          $('#number_'+_this).val(mun);
+          $('#ylnumber_'+_this).val(mun);
+          $('#css_'+_this).attr('data-num',mun)
+          $('#zongjia').val(hj);
+          $('#heji').text('￥'+hj.toFixed(2));
+        }
+      }
+    }
+    function newnumber(_id){
+      var price=$('#price_'+_id).val();
+      var hj=$('#zongjia').val();
+      var mun=$('#number_'+_id).val();
+      var ylmun=$('#ylnumber_'+_id).val();
+      var kcs=$('#kucuns_'+_id).val();
+        
+      if($("#css_"+_id).hasClass("far")){  
+        if((/^(\+|-)?\d+$/.test( mun ))&&mun>0){  
+            $('#number_'+_id).val(mun); 
+            $('#ylnumber_'+_id).val(mun);
+            $('#css_'+_id).attr('data-num',mun)
+        }else{
+            mun=ylmun;
+            $('#number_'+_id).val(mun);
+             $('#ylnumber_'+_id).val(mun);
+            $('#css_'+_id).attr('data-num',mun)
+        }
+        if(Number(mun)>Number(kcs)){
+            mun=kcs;
+            $('#number_'+_id).val(mun);
+            $('#ylnumber_'+_id).val(mun);
+            $('#css_'+_id).attr('data-num',mun)
+        }
+          if(Number(mun)>Number(ylmun)){
+                hj=Number(hj) + Number(price*(mun-ylmun));
+                $('#heji').text('￥'+hj.toFixed(2));
+                $('#zongjia').val(hj);
+            }else{
+                hj=Number(hj)- Number(price*(ylmun-mun));
+                $('#heji').text('￥'+hj.toFixed(2));
+                $('#zongjia').val(hj);
+            }
+      }
+    }
+    function deletes(del){
+      var price=$('#price_'+del).val();
+      var hj=$('#zongjia').val();
+      var mun=$('#number_'+del).val();
+        layer.confirm('是否删除该数据？请谨慎操作！', {
+
+          btn: ['确定','取消'] //按钮
+        }, function(){
+          layer.msg('正在删除，请稍后...');
+          $.ajax({
+                type: "POST",
+                url: "{:U('addon/MemberCenter/MemberCenter/del_cart')}",
+                data: "get_id=" + del,
+                success: function(msg) {
+                    if(msg['del']==1){
+                      layer.msg('删除成功', {icon: 1});
+                      setTimeout(function(){
+                        $("#dangqian_"+del).remove();
+                          var sl=shuliang();
+                          if(sl>0){
+                              $('#shuliang').html('结算'+'（'+sl+'）');
+                          }else{
+                              $('#shuliang').html('结算');
+                          }
+                          hj=hj-mun*price;
+                          $('#zongjia').val(hj);
+                          $('#heji').text('￥'+hj.toFixed(2));
+                      },3000)
+                    }else if(msg['del']==3){
+                      setTimeout(function(){
+                        window.location.href="/index.php?s=/addon/Login/Login/index.html"
+                      },3000)
+                    }else {
+                      layer.msg('删除失败！请稍后重试');
+                    }
+                }
+            });
+        }, function(){
+          scc=1;
+          layer.msg('已取消',{icon: 1});
+        });
+    }
+    function cssa(id){
+      $("#css_"+id).toggleClass('far');
+      var sl =shuliang();
+      var mun = $('#number_'+id).val();
+      var price=$('#price_'+id).val();
+      var hj=$('#zongjia').val();
+      if(sl>0){
+          $('#shuliang').html('结算'+'（'+sl+'）');
+      }else{
+          $('#shuliang').html('结算');
+      }
+      if($("#css_"+id).hasClass("far")){
+          $('#number_'+id).removeAttr("disabled");
+          hj=Number(hj)+Number(mun*price);
+          $('#zongjia').val(hj);
+          $('#heji').text('￥'+hj.toFixed(2));
+       }else{
+         $('#number_'+id).attr("disabled","disabled");
+          hj=hj-mun*price;
+          $('#zongjia').val(hj);
+          $('#heji').text('￥'+hj.toFixed(2));
+       }
+     
+    }
+    function shuliang(){
+       var cs=0;
+     $('.choose').each(function(){
+         //判断当前循环的对象是否是选中状态
+         var che=$(this).is('.far');
+         //将当前循环的对象的选中状态反转         a
+        if(che){
+          cs++; 
+        }
+      })
+     return cs;
+    }
+    //结算
+   $("#shuliang").click(function(){
+       var chk_value =[]; 
+       var mus=[];
+       var hj=$('#zongjia').val();
+        layer.msg('正在提交订单，请稍后...');
+        $(".far").each(function(){
+          chk_value.push($(this).attr('data-id'));
+          mus.push($(this).attr('data-num'));
+        });
+         if(mus==''){ layer.msg('请先选好要提交的数据'); return false;}
+         $.ajax({
+                type: "POST",
+                url: "{:U('addon/MemberCenter/MemberCenter/ajax_js')}",
+                data: "get_id=" + chk_value+"&get_mun="+mus+"&hj="+hj,
+                success: function(msg) {
+                  if(msg['isjs']==3){
+                    layer.msg('您还未登录，正前往登录...');
+                     setTimeout(function(){
+                        window.location.href="/index.php?s=/addon/Login/Login/index.html"
+                      },3000)
+                  }else if(msg['isjs']==1){
+                     window.location.href="{:U('addon/MemberCenter/MemberCenter/qrdd')}";
+                  }else if(msg['isjs']==6){
+                     layer.msg('结算失败，'+msg['ordersum']);
+                  } else{
+                    layer.msg('结算失败，请稍后重试');
+                  }
+                 
+                }
+            });
+   })
+   
+   
+    
+</script>

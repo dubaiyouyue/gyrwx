@@ -1,0 +1,94 @@
+<include file="Public/head_app"/> 
+<!--头部  结束-->
+<div class="dak" style=" padding-bottom:1rem;">
+  <div class="grzl"> <a onclick="javascript:history.back(-1);">
+    <div class="hyjg jfbg" style="margin-top: 55px;">个人资料</div>
+    </a> </div>
+    </div>
+    
+    <div class="jbxx">
+<div class="jbxx-1"><span style="font-size: 14px; margin-left: 0.5rem; margin-right: 0.5rem">基本信息</span><a href="{:U('addon/MemberCenter/MemberCenter/Personal_edit')}" style="float:right;font-size: 14px;  margin-right: 0.5rem">修改</a></div>
+</div>
+
+
+<a href="#"><div class="jbxx2">
+<div class="jbxx-2" style=" margin-top:0.5rem;">
+
+<div class="gywm" style="width:22%"><p><strong>*</strong> 昵称：</p></div>
+<div class="gywm-mx" style="float:left; height:1.75rem; width:73%;"><p style="float:right; color:#999999">{$grzl.nicheng}</p></div>
+</div>
+</div></a>
+
+<a href="#"><div class="jbxx2">
+<div class="jbxx-2">
+
+<div class="gywm" style="width:22%">
+  <p><strong>*</strong> 姓名：</p></div>
+<div class="gywm-mx" style="float:left; height:1.75rem; width:73%;">
+  <p style="float:right; color:#999999">{$grzl.name}</p></div>
+</div>
+</div></a>
+
+<a href="#"><div class="jbxx2">
+<div class="jbxx-2">
+
+<div class="gywm" style="width:22%">
+  <p><strong>*</strong>手机号：</p></div>
+<div class="gywm-mx" style="float:left; height:1.75rem; width:73%;"><p style="float:right; color:#999999">{$grzl.tel}</p>
+</div>
+</div>
+</div></a>
+
+
+<a href="#"><div class="jbxx2">
+<div class="jbxx-2"  style=" margin-top:0.5rem;">
+
+<div class="gywm" style="width:22%">
+  <p><strong>*</strong> 生日：</p></div>
+<div class="gywm-mx" style="float:left; height:1.75rem; width:73%;">
+  <p style="float:right; color:#999999"> <if condition="$grzl[srn]&&$grzl[sry]&&$grzl[srr]">{$grzl.srn}年{$grzl.sry}月{$grzl.srr}日</if></p>
+</div>
+</div>
+</div></a>
+
+
+<a href="#"><div class="jbxx2">
+<div class="jbxx-2">
+
+<div class="gywm" style="width:22%"><p><strong>*</strong> 性   别：</p></div>
+<div class="gywm-mx" style="float:left; height:1.75rem; width:73%;"><p style="float:right; color:#999999">{$grzl.sex}</p>
+</div>
+</div>
+</div></a>
+
+
+<a href="#"><div class="jbxx2">
+<div class="jbxx-2"  style=" margin-top:0.5rem;">
+
+<div class="gywm" style="width:22%"><p><strong>*</strong> 电子邮箱：</p></div>
+<div class="gywm-mx" style="float:left; height:1.75rem; width:73%;"><p style="float:right; color:#999999">{$grzl.email}</p>
+</div>
+</div>
+</div></a>
+
+
+<a href="#"><div class="jbxx2">
+<div class="jbxx-2">
+
+<div class="gywm" style="width:22%"><p><strong>*</strong> 所在地：</p></div>
+<div class="gywm-mx" style="float:left; height:1.75rem; width:73%;"><p style="float:right; color:#999999">{$grzl.szds}{$grzl.szdsq}{$grzl.szdq}</p></div>
+</div>
+</div></a>
+
+
+<a href="#"><div class="jbxx2">
+<div class="jbxx-2" style="margin-bottom:1rem;">
+
+<div class="gywm" style="width:22%">
+  <p><strong>*</strong> 家乡地址：</p></div>
+<div class="gywm-mx" style="float:left; height:1.75rem; width:73%;"><p style="float:right; color:#999999">{$grzl.jxs}{$grzl.jxss}{$grzl.jxq}</p>
+</div>
+</div>
+</div></a>
+
+<include file="Public/footer_app"/>  

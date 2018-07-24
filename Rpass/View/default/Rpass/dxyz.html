@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="textml;charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<title>忘记密码（04）</title>
+<!--css start-->
+<link href="/css/style.css" rel="stylesheet"/>
+<link href="/css/master.css" rel="stylesheet"/>
+<!--css end-->
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.0/jquery.min.js"></script>
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body style="padding-bottom:3rem; background:#FFF;">
+	<div class="Login">
+    <div class="zc-logo"><a href="/index.php?s=/addon/WeiSite/WeiSite/index.html"><img src="images/5/zc-logo.png" /></a></div>
+    
+    <h2><strong>忘记密码</strong></h2>
+		<ul>
+      <li>
+        <p>当前账号为：{$zhanghao}</p>
+        <p>请先用密保手机130******72发送短信，然后点"我已发送"按钮：</p>
+        <div class="fdx"><p>发短信：<strong>找回密码4104</strong></p></div>
+        <div class="fdx"><p>到号码：<strong>1069070069</strong></p></div>
+    	</li>	
+	    <li class="Login-Btn"><a href="">我已发送</a></li>
+	  </ul>
+    <div class="dxf">
+        <p>短信费用一般为0.1元/条、全部由营商收取。</p>
+        <p><a onclick="genghuan();" >短信用不了？请更换其他验证方式。</a></p>
+    </div>  
+	</div>
+   <input type="hidden" id="telsaas" value="{$zhanghao}">
+</body>
+</html>
+<script type="text/javascript">
+  function genghuan () {
+    var tels=$("#telsaas").val();
+    window.location.href='/index.php?s=/addon/Rpass/Rpass/mmyz/zhanghao/'+tels+'.html'
+  }
+</script>

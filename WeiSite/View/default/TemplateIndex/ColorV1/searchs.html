@@ -1,0 +1,86 @@
+<include file="Public/head_app"/> 
+<!----------------------搜索框 结束-------------->
+<div class="nvz-sho" style="margin-top:3rem;">
+  <div class="sho-left">
+    <!-- <input style="height:1.5rem; width:80%; float: left" type='text' name='search'> -->
+    <p><input name='wxtitle' id='wxtitle' style="height: 1.4rem; line-height: 1.4rem; width:100%;outline:medium; background-color: #f9f9f9; color:#858282" type="text" value="{$sname}" placeholder="搜索品牌、商品"></p>
+  </div>
+  <div class="sho1-right">
+    <p><a onclick="wxsearch()">搜索</a></p>
+  </div>
+</div>
+
+ <div id='goods_morewx' class="clearUl" style="background:#fff;width:100%;">
+  <volist key="kkn" name='goodlist' id='r'>
+    <a href="{:U('addon/WeiSite/WeiSite/Goods_detail',array(id=>$r[id]))}" style="width: 45%;float: left; margin:0.5rem 0rem 0rem 0.5rem">
+    <div class="nov-left" style="width:100%;background: #fff;">
+      <div class="nov-pic1"><img src="{$r.cover|get_cover_url}" width="100%" height="" /></div>  
+     <div class="nov-wenzi">{$r.title}</div>
+     <div class="nov-jq"><strong>￥{$r.price}</strong></div>
+    </div></a>
+  </volist>
+  </div>
+  <a onclick="moreaearch(this)"><div id='more_tswx' class="nov-10">点击加载更多</div></a>
+<input type="hidden" id="pyhs" value="1">
+<input type="hidden" id="sename" value="{$sname}">
+<!----------------------搜索框 结束--------------> 
+<include file="Public/footer_app"/>  
+<script type="text/javascript">
+   function tishicengjsqiuonclick(textwz,nicheng){
+    $('body').tishicengjsqiu({
+      textwz:  textwz, //提示层文字 支持html
+      tishicbj: '#ff662d', //提示层背景 #ddd
+      colors: '#fff', //文字颜色
+      iddtt:3, //自动关闭时间秒
+      admmint:'flipInX', //显示动画
+      //动画属性说明
+      admmout:'zoomOut' //隐藏动画
+    });
+    document.getElementById(nicheng).focus();
+  }
+  function wxsearch(){
+    var wds=$('#wxtitle').val();
+    if(wds.length<0||!wds){
+      tishicengjsqiuonclick('请输入搜索内容','wxtitle'); return false;
+    }
+   
+    window.location.href="/index.php?s=/addon/WeiSite/WeiSite/Searchs/wds/"+wds+'.html'; //  /index.php?s=/addon/Rpass/Rpass/zhanghao/zhanghao/'+tels+'.html'
+   
+  }
+  var wxlp=1;
+  function moreaearch(){
+    if(wxlp==2){return false;}
+    $('#more_tswx').html('加载中...');
+    wxlp=2;
+    var name=$('#sename').val();
+    var pse=$('#pyhs').val();
+     $.ajax({
+            type: "POST",
+            url: "{:U('addon/WeiSite/WeiSite/Moresearch')}",
+            data: "pse="+pse+"&name="+name,
+            success: function(msg){
+                  var html='';
+                if(msg['len']==1){
+                  $.each(msg.lists, function(i, valus) {
+                    html+='<a href="'+valus.urls+'" style="width: 45%;float: left; margin:0.5rem 0rem 0rem 0.5rem">';
+                    html+='<div class="nov-left" style="width:100%;background: #fff;">';
+                    html+='<div class="nov-pic1"><img src="'+valus.thumb+'" width="100%" height="" /></div>';
+                    html+='<div class="nov-wenzi">'+valus.title+'</div>';
+                    html+='<div class="nov-jq"><strong>￥'+valus.price+'</strong></div>';
+                    html+='</div></a>';
+
+                  });
+                  wxlp=1;
+                  $('#more_tswx').html('加载更多>>');
+                  $("#pyhs").val(msg['listpss']);
+                  $("#goods_morewx").append(html);
+              }else{
+                  wxlp=2;
+                  
+                  $('#more_tswx').html('已加载完');
+              }
+
+          }
+    });
+  }
+</script>

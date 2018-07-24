@@ -1,0 +1,63 @@
+<form action="/index.php?s=/addon/WeiSite/WeiSite/wjmmt.html" method="POST" name="myform" id="myform">
+
+
+
+	<div class="Login" style=" margin-top:-0.5rem;">
+    
+		<ul>
+        
+        <li>
+        <h3>帐号：</h3>
+  <p class="Code-Pic1">
+					<input type="text" id="sj" name="sj" placeholder="邮箱/手机号" />
+					
+				</p>
+		  </li>
+        
+        
+	  
+        
+            
+			
+			
+			
+	  <li class="Login-Btn"  style=" padding-bottom:1.5rem; margin-top:1rem;">
+				<a onclick="checkedformdx();" id="liqidonglu">确定</a>
+			</li>
+			
+          
+            
+            
+	  </ul>
+	</div>
+
+</form>
+
+<script>
+<?php
+$ok=$_GET['ok'];
+if($ok=='yx') echo 'alert(\'邮箱没有注册\');location.href = \'/index.php?s=/addon/WeiSite/WeiSite/wjmm.html\';';
+if($ok=='sj') echo 'alert(\'手机没有注册\');location.href = \'/index.php?s=/addon/WeiSite/WeiSite/wjmm.html\';';
+?>
+document.getElementById('sj').focus();
+function checkedformdx(){
+	var sj=$('#sj').val();
+	if(!sj){
+		document.getElementById('sj').focus();
+		alert('请填写正确的手机号/邮箱');
+		return false;
+	}
+	document.getElementById("liqidonglu").onclick = function(){};
+	$('#liqidonglu').html('正在修改...');
+	document.getElementById('myform').submit();
+}
+</script>
+
+
+
+
+
+
+
+
+<div class="clearfix"></div>
